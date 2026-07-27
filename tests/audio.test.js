@@ -66,6 +66,7 @@ test('audio: creates an oscillator per sound once unlocked', () => {
 
 test('audio: stays silent while sound is toggled off', () => {
   state.reset();
+  state.set('soundOn', false);
   const started = [];
   const audio = createAudio(fakeContextFactory(started));
   audio.unlock();

@@ -5,10 +5,15 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.6;
+  /* Pixel glyphs are wide and have no lowercase descender rhythm, so body copy
+     needs a smaller size and much looser leading than a normal face would. */
+  font-size: 0.68rem;
+  line-height: 2.1;
+  letter-spacing: 0.02em;
   transition: background-color 200ms linear, color 200ms linear;
 }
+
+p, li { max-width: 46rem; }
 
 h1, h2, h3, .hud, .press-start, button {
   font-family: var(--font-display);

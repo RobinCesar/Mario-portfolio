@@ -30,11 +30,14 @@
   --space-3: 2rem;
   --space-4: 4rem;
 
+  /* Pixel type everywhere, including body copy. It is far wider than a normal
+     face, so body sizes run small with generous leading to stay readable. */
   --font-display: 'Press Start 2P', ui-monospace, 'Courier New', monospace;
-  --font-body: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Press Start 2P', ui-monospace, 'Courier New', monospace;
 
   --pixel: 4px;
   --hud-height: 3rem;
+  --play-ground: 4.5rem;
 }
 
 /* Subspace: the dark mode joke. Swaps every semantic token at once. */

@@ -5,7 +5,7 @@ test('state: returns defaults', () => {
   state.reset();
   assertEqual(state.get('coins'), 0, 'coins default');
   assertEqual(state.get('cherries'), [], 'cherries default');
-  assertEqual(state.get('soundOn'), false, 'soundOn default');
+  assertEqual(state.get('soundOn'), true, 'sound is on by default');
   assertEqual(state.get('starman'), false, 'starman default');
 });
 

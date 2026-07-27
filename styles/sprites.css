@@ -18,21 +18,44 @@
   pointer-events: none;
   overflow: hidden;
 }
-.sprite--cloud {
-  position: absolute;
-  top: 12%;
-  left: 8%;
-  width: 6rem;
-  height: 3rem;
+/* Background layers, back to front: dunes, pyramid, bushes, cacti, clouds. */
+.scenery .sprite { position: absolute; }
+
+.sprite--dune { height: 5rem; width: 24rem; opacity: 0.55; }
+.sprite--dune-1 { bottom: calc(var(--ground-height) - 1rem); left: -4rem; }
+.sprite--dune-2 { bottom: calc(var(--ground-height) - 0.5rem); right: -6rem; width: 30rem; opacity: 0.4; }
+
+.sprite--pyramid {
+  bottom: calc(var(--ground-height) - 0.75rem);
+  left: 12%;
+  width: 15rem;
+  height: 10rem;
+  opacity: 0.75;
 }
+
+.sprite--cloud { top: 12%; left: 8%; width: 8rem; height: 4rem; }
+.sprite--cloud-2 { top: 22%; right: 14%; width: 5rem; height: 2.5rem; }
+.sprite--cloud-3 { top: 8%; right: 34%; width: 4rem; height: 2rem; opacity: 0.85; }
+
+.sprite--bush { height: 2.5rem; width: 5rem; }
+.sprite--bush-1 { bottom: calc(var(--ground-height) - 0.25rem); left: 30%; }
+.sprite--bush-2 { bottom: calc(var(--ground-height) - 0.25rem); right: 28%; width: 4rem; height: 2rem; }
+
 /* Planted in the sand rather than floating: sits on top of the ground band. */
 .sprite--cactus {
-  position: absolute;
   bottom: calc(var(--ground-height) - 0.5rem);
   right: 12%;
   width: 3.5rem;
   height: 5.25rem;
   z-index: 1;
+}
+.sprite--cactus-2 {
+  bottom: calc(var(--ground-height) - 0.5rem);
+  left: 6%;
+  width: 2.5rem;
+  height: 3.75rem;
+  z-index: 1;
+  opacity: 0.9;
 }
 
 /* Shy Guys are injected by parallax.js and walk along the top of the ground. */

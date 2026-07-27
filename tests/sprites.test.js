@@ -26,28 +26,43 @@ test('sprites: every id referenced by index.html is defined', () => {
   }
 });
 
+// Symbols swapped in at runtime rather than written into the markup. Each one
+// is verified against its owning script below, so this cannot become a dumping
+// ground for art nothing uses.
+const RUNTIME_ONLY = {
+  'sprite-shyguy': 'scripts/parallax.js',
+  'sprite-star': 'scripts/cherries.js',
+  'sprite-player-walk-a': 'scripts/player.js',
+  'sprite-player-walk-b': 'scripts/player.js',
+  'sprite-player-jump': 'scripts/player.js',
+};
+
 test('sprites: no unused symbols accumulate', () => {
   const referenced = referencedIds();
-  // Shy Guy is injected by parallax.js and Star by the cherries.js Starman
-  // banner, so neither appears in the static markup. Anything else unused is
-  // dead weight and should be deleted.
-  const runtimeOnly = new Set(['sprite-shyguy', 'sprite-star']);
   for (const id of definedIds()) {
     assert(
-      referenced.has(id) || runtimeOnly.has(id),
+      referenced.has(id) || id in RUNTIME_ONLY,
       `sprites.svg defines unused symbol #${id}`,
     );
   }
 });
 
 test('sprites: runtime-injected symbols really are referenced by a script', () => {
-  // Guards the whitelist above from becoming a dumping ground.
-  for (const [id, file] of [
-    ['sprite-shyguy', 'scripts/parallax.js'],
-    ['sprite-star', 'scripts/cherries.js'],
-  ]) {
+  for (const [id, file] of Object.entries(RUNTIME_ONLY)) {
     const source = readFileSync(new URL(file, base), 'utf8');
-    assert(source.includes(`#${id}`), `${file} no longer references #${id}`);
+    // player.js builds its frame ids from frameFor(), so accept either a
+    // literal reference or the bare frame name appearing in the source.
+    assert(
+      source.includes(`#${id}`) || source.includes(`'${id}'`),
+      `${file} no longer references ${id}`,
+    );
+  }
+});
+
+test('sprites: the player has all four animation frames', () => {
+  const defined = definedIds();
+  for (const frame of ['idle', 'walk-a', 'walk-b', 'jump']) {
+    assert(defined.has(`sprite-player-${frame}`), `missing player frame: ${frame}`);
   }
 });
 

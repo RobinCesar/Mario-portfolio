@@ -4,7 +4,9 @@ const STORAGE_KEY = 'mario-portfolio';
 const DEFAULTS = {
   coins: 0,
   cherries: [],
-  soundOn: false,
+  // Sound is on by default. Browsers still block audio until the first user
+  // gesture, so audio.unlock() runs on the first pointer or key event.
+  soundOn: true,
   subspace: false,
   starman: false,
 };

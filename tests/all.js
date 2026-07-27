@@ -8,3 +8,4 @@ import './subspace.test.js';
 import './cherries.test.js';
 import './slots.test.js';
 import './parallax.test.js';
+import './player.test.js';

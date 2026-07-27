@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="styles/layout.css">
 <link rel="stylesheet" href="styles/sprites.css">
 <link rel="stylesheet" href="styles/sections.css">
+<link rel="stylesheet" href="styles/player.css">
 </head>
 <body>
 
@@ -40,8 +41,16 @@
 
 <section id="title" class="section section--title">
   <div class="scenery" aria-hidden="true">
+    <svg class="sprite sprite--pyramid" aria-hidden="true" width="48" height="32"><use href="assets/sprites.svg#sprite-pyramid"></use></svg>
+    <svg class="sprite sprite--dune sprite--dune-1" aria-hidden="true" width="64" height="16"><use href="assets/sprites.svg#sprite-dune"></use></svg>
+    <svg class="sprite sprite--dune sprite--dune-2" aria-hidden="true" width="64" height="16"><use href="assets/sprites.svg#sprite-dune"></use></svg>
     <svg class="sprite sprite--cloud" aria-hidden="true" width="32" height="16"><use href="assets/sprites.svg#sprite-cloud"></use></svg>
+    <svg class="sprite sprite--cloud-2" aria-hidden="true" width="24" height="12"><use href="assets/sprites.svg#sprite-cloud-small"></use></svg>
+    <svg class="sprite sprite--cloud-3" aria-hidden="true" width="24" height="12"><use href="assets/sprites.svg#sprite-cloud-small"></use></svg>
+    <svg class="sprite sprite--bush sprite--bush-1" aria-hidden="true" width="24" height="12"><use href="assets/sprites.svg#sprite-bush"></use></svg>
+    <svg class="sprite sprite--bush sprite--bush-2" aria-hidden="true" width="24" height="12"><use href="assets/sprites.svg#sprite-bush"></use></svg>
     <svg class="sprite sprite--cactus" aria-hidden="true" width="16" height="24"><use href="assets/sprites.svg#sprite-cactus"></use></svg>
+    <svg class="sprite sprite--cactus-2" aria-hidden="true" width="16" height="24"><use href="assets/sprites.svg#sprite-cactus"></use></svg>
   </div>
   <h1>Robin Elvius</h1>
   <p class="subtitle">Engineering physics student &amp; developer &mdash; Uppsala, Sweden</p>
@@ -344,6 +353,22 @@
 </section>
 
 </main>
+
+<!-- The play layer. Purely decorative: every element it can reach is a real
+     button that also works with Tab and Enter. -->
+<div id="stage" class="stage" aria-hidden="true" hidden>
+  <div class="stage__ground"></div>
+  <svg id="player-sprite" class="player" width="44" height="55">
+    <use href="assets/sprites.svg#sprite-player-idle"></use>
+  </svg>
+</div>
+
+<div class="dpad" aria-hidden="true" hidden>
+  <button type="button" data-input="left" tabindex="-1">◀</button>
+  <button type="button" data-input="action" tabindex="-1">▼</button>
+  <button type="button" data-input="right" tabindex="-1">▶</button>
+  <button type="button" data-input="jump" tabindex="-1">▲</button>
+</div>
 
 <footer class="footer">
   <p>Built by Robin Elvius with plain HTML, CSS and JavaScript. Pixel art is original work &mdash; an homage to Super Mario Bros 2, not affiliated with Nintendo.</p>

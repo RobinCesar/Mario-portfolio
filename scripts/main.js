@@ -7,6 +7,8 @@ import { initSubspace, initialSubspace } from './subspace.js';
 import { initCherries } from './cherries.js';
 import { initSlots } from './slots.js';
 import { initParallax } from './parallax.js';
+import { initPlayer } from './player.js';
+import { initTitleScreen } from './titlescreen.js';
 
 function boot() {
   // hydrate reports only what storage actually held, so a first-time visitor
@@ -33,6 +35,11 @@ function boot() {
   initCherries(document, audio);
   initSlots(document, audio);
   initParallax(document);
+
+  // The platformer is layered on last: it activates the same buttons the rest
+  // of the page already wired up, so it adds no new interaction logic.
+  const player = initPlayer(document, audio);
+  initTitleScreen(document, audio, player);
 }
 
 if (document.readyState === 'loading') {

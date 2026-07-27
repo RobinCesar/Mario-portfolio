@@ -12,7 +12,18 @@ export const SOUNDS = {
   bobomb: { type: 'sawtooth', from: 160,  to: 40,   seconds: 0.35, gain: 0.22 },
   star:   { type: 'square',   from: 660,  to: 1320, seconds: 0.5,  gain: 0.18 },
   reel:   { type: 'square',   from: 880,  to: 880,  seconds: 0.06, gain: 0.12 },
+  jump:   { type: 'square',   from: 392,  to: 784,  seconds: 0.14, gain: 0.14 },
+  land:   { type: 'square',   from: 196,  to: 131,  seconds: 0.07, gain: 0.1 },
 };
+
+/**
+ * The Press Start fanfare, as [note, startBeat, beats] triples. Written out
+ * rather than generated so the melody is editable by ear.
+ */
+export const START_JINGLE = [
+  [523, 0, 1], [659, 1, 1], [784, 2, 1], [1047, 3, 2],
+  [784, 5, 1], [1047, 6, 3],
+];
 
 export function createAudio(
   ContextCtor = globalThis.AudioContext || globalThis.webkitAudioContext,
@@ -65,5 +76,34 @@ export function createAudio(
     }
   }
 
-  return { available: true, unlock, play };
+  /** Plays a [freq, startBeat, beats] score. Used for the Press Start jingle. */
+  function playSequence(score, beatSeconds = 0.11) {
+    if (broken || !state.get('soundOn')) return;
+    if (!unlock()) return;
+
+    try {
+      const start = context.currentTime;
+      for (const [frequency, atBeat, beats] of score) {
+        const at = start + atBeat * beatSeconds;
+        const duration = beats * beatSeconds;
+        const oscillator = context.createOscillator();
+        const gain = context.createGain();
+
+        oscillator.type = 'square';
+        oscillator.frequency.setValueAtTime(frequency, at);
+        gain.gain.setValueAtTime(0.0001, at);
+        gain.gain.exponentialRampToValueAtTime(0.16, at + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.0001, at + duration);
+
+        oscillator.connect(gain);
+        gain.connect(context.destination);
+        oscillator.start(at);
+        oscillator.stop(at + duration);
+      }
+    } catch {
+      broken = true;
+    }
+  }
+
+  return { available: true, unlock, play, playSequence };
 }

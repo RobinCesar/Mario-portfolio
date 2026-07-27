@@ -1,127 +1,350 @@
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
 
+  <!-- ============================ PLAYER ============================ -->
+  <!-- Original character: red cap, blue overalls, tan face. Four frames. -->
+
+  <symbol id="sprite-player-idle" viewBox="0 0 16 20" shape-rendering="crispEdges">
+    <rect x="4" y="0" width="8" height="1" fill="#A80000"/>
+    <rect x="3" y="1" width="10" height="2" fill="#D82800"/>
+    <rect x="2" y="3" width="12" height="1" fill="#F87858"/>
+    <rect x="4" y="4" width="8" height="4" fill="#F8B888"/>
+    <rect x="4" y="4" width="8" height="1" fill="#D8A070"/>
+    <rect x="5" y="5" width="2" height="2" fill="#201808"/>
+    <rect x="9" y="5" width="2" height="2" fill="#201808"/>
+    <rect x="6" y="7" width="4" height="1" fill="#D8A070"/>
+    <rect x="3" y="8" width="10" height="5" fill="#0058F8"/>
+    <rect x="3" y="8" width="10" height="1" fill="#3CBCFC"/>
+    <rect x="5" y="9" width="6" height="3" fill="#D82800"/>
+    <rect x="7" y="10" width="2" height="1" fill="#FCE000"/>
+    <rect x="1" y="9" width="2" height="4" fill="#F8B888"/>
+    <rect x="13" y="9" width="2" height="4" fill="#F8B888"/>
+    <rect x="4" y="13" width="3" height="4" fill="#0040C0"/>
+    <rect x="9" y="13" width="3" height="4" fill="#0040C0"/>
+    <rect x="3" y="17" width="4" height="3" fill="#201808"/>
+    <rect x="9" y="17" width="4" height="3" fill="#201808"/>
+  </symbol>
+
+  <symbol id="sprite-player-walk-a" viewBox="0 0 16 20" shape-rendering="crispEdges">
+    <rect x="4" y="0" width="8" height="1" fill="#A80000"/>
+    <rect x="3" y="1" width="10" height="2" fill="#D82800"/>
+    <rect x="2" y="3" width="12" height="1" fill="#F87858"/>
+    <rect x="4" y="4" width="8" height="4" fill="#F8B888"/>
+    <rect x="4" y="4" width="8" height="1" fill="#D8A070"/>
+    <rect x="6" y="5" width="2" height="2" fill="#201808"/>
+    <rect x="10" y="5" width="1" height="2" fill="#201808"/>
+    <rect x="6" y="7" width="4" height="1" fill="#D8A070"/>
+    <rect x="3" y="8" width="10" height="5" fill="#0058F8"/>
+    <rect x="3" y="8" width="10" height="1" fill="#3CBCFC"/>
+    <rect x="5" y="9" width="6" height="3" fill="#D82800"/>
+    <rect x="7" y="10" width="2" height="1" fill="#FCE000"/>
+    <rect x="0" y="8" width="3" height="3" fill="#F8B888"/>
+    <rect x="13" y="10" width="3" height="3" fill="#F8B888"/>
+    <rect x="3" y="13" width="4" height="4" fill="#0040C0"/>
+    <rect x="9" y="13" width="3" height="3" fill="#0040C0"/>
+    <rect x="1" y="17" width="5" height="3" fill="#201808"/>
+    <rect x="10" y="16" width="5" height="3" fill="#201808"/>
+  </symbol>
+
+  <symbol id="sprite-player-walk-b" viewBox="0 0 16 20" shape-rendering="crispEdges">
+    <rect x="4" y="0" width="8" height="1" fill="#A80000"/>
+    <rect x="3" y="1" width="10" height="2" fill="#D82800"/>
+    <rect x="2" y="3" width="12" height="1" fill="#F87858"/>
+    <rect x="4" y="4" width="8" height="4" fill="#F8B888"/>
+    <rect x="4" y="4" width="8" height="1" fill="#D8A070"/>
+    <rect x="5" y="5" width="1" height="2" fill="#201808"/>
+    <rect x="8" y="5" width="2" height="2" fill="#201808"/>
+    <rect x="6" y="7" width="4" height="1" fill="#D8A070"/>
+    <rect x="3" y="8" width="10" height="5" fill="#0058F8"/>
+    <rect x="3" y="8" width="10" height="1" fill="#3CBCFC"/>
+    <rect x="5" y="9" width="6" height="3" fill="#D82800"/>
+    <rect x="7" y="10" width="2" height="1" fill="#FCE000"/>
+    <rect x="0" y="10" width="3" height="3" fill="#F8B888"/>
+    <rect x="13" y="8" width="3" height="3" fill="#F8B888"/>
+    <rect x="4" y="13" width="3" height="3" fill="#0040C0"/>
+    <rect x="9" y="13" width="4" height="4" fill="#0040C0"/>
+    <rect x="1" y="16" width="5" height="3" fill="#201808"/>
+    <rect x="10" y="17" width="5" height="3" fill="#201808"/>
+  </symbol>
+
+  <symbol id="sprite-player-jump" viewBox="0 0 16 20" shape-rendering="crispEdges">
+    <rect x="4" y="0" width="8" height="1" fill="#A80000"/>
+    <rect x="3" y="1" width="10" height="2" fill="#D82800"/>
+    <rect x="2" y="3" width="12" height="1" fill="#F87858"/>
+    <rect x="4" y="4" width="8" height="4" fill="#F8B888"/>
+    <rect x="4" y="4" width="8" height="1" fill="#D8A070"/>
+    <rect x="5" y="5" width="2" height="2" fill="#201808"/>
+    <rect x="9" y="5" width="2" height="2" fill="#201808"/>
+    <rect x="5" y="7" width="6" height="1" fill="#D8A070"/>
+    <rect x="3" y="8" width="10" height="5" fill="#0058F8"/>
+    <rect x="3" y="8" width="10" height="1" fill="#3CBCFC"/>
+    <rect x="5" y="9" width="6" height="3" fill="#D82800"/>
+    <rect x="7" y="10" width="2" height="1" fill="#FCE000"/>
+    <rect x="0" y="5" width="3" height="4" fill="#F8B888"/>
+    <rect x="13" y="5" width="3" height="4" fill="#F8B888"/>
+    <rect x="3" y="13" width="4" height="3" fill="#0040C0"/>
+    <rect x="9" y="13" width="4" height="4" fill="#0040C0"/>
+    <rect x="1" y="16" width="5" height="3" fill="#201808"/>
+    <rect x="10" y="17" width="5" height="3" fill="#201808"/>
+  </symbol>
+
+  <!-- ============================ HUD ============================ -->
+
   <symbol id="sprite-heart" viewBox="0 0 16 16" shape-rendering="crispEdges">
-    <rect x="3" y="3" width="3" height="1" fill="#D82800"/>
-    <rect x="10" y="3" width="3" height="1" fill="#D82800"/>
-    <rect x="2" y="4" width="5" height="2" fill="#F87858"/>
-    <rect x="9" y="4" width="5" height="2" fill="#F87858"/>
-    <rect x="2" y="6" width="12" height="2" fill="#D82800"/>
-    <rect x="3" y="8" width="10" height="2" fill="#D82800"/>
-    <rect x="4" y="10" width="8" height="1" fill="#D82800"/>
-    <rect x="5" y="11" width="6" height="1" fill="#A80000"/>
-    <rect x="6" y="12" width="4" height="1" fill="#A80000"/>
-    <rect x="7" y="13" width="2" height="1" fill="#A80000"/>
+    <rect x="3" y="2" width="3" height="1" fill="#F87858"/>
+    <rect x="10" y="2" width="3" height="1" fill="#F87858"/>
+    <rect x="2" y="3" width="5" height="1" fill="#F8B8A8"/>
+    <rect x="9" y="3" width="5" height="1" fill="#F87858"/>
+    <rect x="1" y="4" width="6" height="2" fill="#F87858"/>
+    <rect x="9" y="4" width="6" height="2" fill="#D82800"/>
+    <rect x="2" y="4" width="2" height="2" fill="#FCFCFC"/>
+    <rect x="1" y="6" width="14" height="2" fill="#D82800"/>
+    <rect x="2" y="8" width="12" height="2" fill="#D82800"/>
+    <rect x="2" y="9" width="12" height="1" fill="#A80000"/>
+    <rect x="3" y="10" width="10" height="1" fill="#A80000"/>
+    <rect x="4" y="11" width="8" height="1" fill="#A80000"/>
+    <rect x="5" y="12" width="6" height="1" fill="#780000"/>
+    <rect x="6" y="13" width="4" height="1" fill="#780000"/>
+    <rect x="7" y="14" width="2" height="1" fill="#780000"/>
   </symbol>
 
   <symbol id="sprite-coin" viewBox="0 0 16 16" shape-rendering="crispEdges">
-    <rect x="6" y="2" width="4" height="1" fill="#C87800"/>
-    <rect x="5" y="3" width="6" height="1" fill="#FCE000"/>
+    <rect x="6" y="1" width="4" height="1" fill="#C87800"/>
+    <rect x="5" y="2" width="6" height="1" fill="#FCE000"/>
+    <rect x="4" y="3" width="8" height="1" fill="#FCE000"/>
     <rect x="4" y="4" width="8" height="8" fill="#FCE000"/>
-    <rect x="7" y="5" width="2" height="6" fill="#C87800"/>
-    <rect x="5" y="12" width="6" height="1" fill="#FCE000"/>
-    <rect x="6" y="13" width="4" height="1" fill="#C87800"/>
+    <rect x="4" y="4" width="2" height="8" fill="#FCFCA0"/>
+    <rect x="10" y="4" width="2" height="8" fill="#C87800"/>
+    <rect x="6" y="5" width="4" height="6" fill="#C87800"/>
+    <rect x="7" y="6" width="2" height="4" fill="#FCE000"/>
+    <rect x="4" y="12" width="8" height="1" fill="#FCE000"/>
+    <rect x="5" y="13" width="6" height="1" fill="#C87800"/>
+    <rect x="6" y="14" width="4" height="1" fill="#906000"/>
   </symbol>
 
   <symbol id="sprite-cherry" viewBox="0 0 16 16" shape-rendering="crispEdges">
+    <rect x="7" y="0" width="2" height="1" fill="#008000"/>
     <rect x="8" y="1" width="1" height="4" fill="#00A800"/>
-    <rect x="9" y="2" width="3" height="1" fill="#00A800"/>
+    <rect x="9" y="1" width="4" height="1" fill="#00A800"/>
+    <rect x="12" y="2" width="2" height="1" fill="#58D858"/>
     <rect x="5" y="5" width="1" height="3" fill="#008000"/>
     <rect x="10" y="5" width="1" height="3" fill="#008000"/>
-    <rect x="2" y="8" width="5" height="5" fill="#D82800"/>
-    <rect x="9" y="8" width="5" height="5" fill="#D82800"/>
-    <rect x="3" y="9" width="2" height="2" fill="#F87858"/>
-    <rect x="10" y="9" width="2" height="2" fill="#F87858"/>
+    <rect x="3" y="7" width="3" height="1" fill="#F87858"/>
+    <rect x="10" y="7" width="3" height="1" fill="#D82800"/>
+    <rect x="2" y="8" width="5" height="4" fill="#D82800"/>
+    <rect x="9" y="8" width="5" height="4" fill="#D82800"/>
+    <rect x="3" y="8" width="2" height="2" fill="#F87858"/>
+    <rect x="10" y="8" width="2" height="2" fill="#F87858"/>
+    <rect x="3" y="8" width="1" height="1" fill="#FCFCFC"/>
+    <rect x="10" y="8" width="1" height="1" fill="#FCFCFC"/>
+    <rect x="3" y="12" width="3" height="1" fill="#A80000"/>
+    <rect x="10" y="12" width="3" height="1" fill="#A80000"/>
   </symbol>
+
+  <!-- ============================ INTERACTIVE ============================ -->
 
   <symbol id="sprite-question-block" viewBox="0 0 16 16" shape-rendering="crispEdges">
     <rect x="0" y="0" width="16" height="16" fill="#E09850"/>
-    <rect x="0" y="0" width="16" height="2" fill="#FCE000"/>
-    <rect x="0" y="14" width="16" height="2" fill="#C84C0C"/>
-    <rect x="0" y="0" width="2" height="16" fill="#FCE000"/>
-    <rect x="14" y="0" width="2" height="16" fill="#C84C0C"/>
-    <rect x="5" y="4" width="6" height="2" fill="#201808"/>
-    <rect x="9" y="6" width="2" height="2" fill="#201808"/>
+    <rect x="0" y="0" width="16" height="1" fill="#FCE8B0"/>
+    <rect x="0" y="1" width="1" height="15" fill="#FCE8B0"/>
+    <rect x="1" y="1" width="14" height="1" fill="#F0C078"/>
+    <rect x="15" y="0" width="1" height="16" fill="#904000"/>
+    <rect x="0" y="15" width="16" height="1" fill="#904000"/>
+    <rect x="1" y="14" width="14" height="1" fill="#C84C0C"/>
+    <rect x="1" y="1" width="2" height="2" fill="#FCFCFC"/>
+    <rect x="13" y="1" width="2" height="2" fill="#FCFCFC"/>
+    <rect x="1" y="13" width="2" height="2" fill="#FCFCFC"/>
+    <rect x="13" y="13" width="2" height="2" fill="#FCFCFC"/>
+    <rect x="5" y="3" width="6" height="2" fill="#201808"/>
+    <rect x="4" y="4" width="2" height="2" fill="#201808"/>
+    <rect x="10" y="4" width="2" height="3" fill="#201808"/>
+    <rect x="8" y="7" width="3" height="2" fill="#201808"/>
     <rect x="7" y="8" width="2" height="2" fill="#201808"/>
     <rect x="7" y="12" width="2" height="2" fill="#201808"/>
   </symbol>
 
   <symbol id="sprite-door" viewBox="0 0 16 24" shape-rendering="crispEdges">
+    <rect x="0" y="1" width="16" height="23" fill="#904000"/>
     <rect x="1" y="2" width="14" height="22" fill="#C84C0C"/>
-    <rect x="3" y="4" width="10" height="20" fill="#E09850"/>
-    <rect x="3" y="4" width="10" height="1" fill="#FCE000"/>
-    <rect x="11" y="14" width="2" height="2" fill="#FCE000"/>
-    <rect x="6" y="8" width="4" height="4" fill="#201808"/>
+    <rect x="2" y="3" width="12" height="21" fill="#E09850"/>
+    <rect x="2" y="3" width="12" height="1" fill="#F0C078"/>
+    <rect x="2" y="3" width="1" height="21" fill="#F0C078"/>
+    <rect x="13" y="4" width="1" height="20" fill="#C84C0C"/>
+    <rect x="4" y="6" width="8" height="7" fill="#C84C0C"/>
+    <rect x="5" y="7" width="6" height="5" fill="#201808"/>
+    <rect x="5" y="7" width="6" height="1" fill="#403020"/>
+    <rect x="4" y="16" width="8" height="1" fill="#C84C0C"/>
+    <rect x="11" y="18" width="2" height="2" fill="#FCE000"/>
+    <rect x="11" y="18" width="1" height="1" fill="#FCFCA0"/>
   </symbol>
 
   <symbol id="sprite-sprout" viewBox="0 0 16 16" shape-rendering="crispEdges">
-    <rect x="7" y="4" width="2" height="8" fill="#008000"/>
-    <rect x="3" y="6" width="4" height="2" fill="#00A800"/>
-    <rect x="2" y="8" width="5" height="1" fill="#00A800"/>
-    <rect x="9" y="6" width="4" height="2" fill="#00A800"/>
-    <rect x="9" y="8" width="5" height="1" fill="#00A800"/>
-    <rect x="0" y="12" width="16" height="4" fill="#E09850"/>
-    <rect x="0" y="12" width="16" height="1" fill="#00A800"/>
+    <rect x="7" y="2" width="2" height="9" fill="#00A800"/>
+    <rect x="7" y="2" width="1" height="9" fill="#58D858"/>
+    <rect x="4" y="4" width="3" height="1" fill="#58D858"/>
+    <rect x="2" y="5" width="5" height="2" fill="#00A800"/>
+    <rect x="2" y="5" width="4" height="1" fill="#58D858"/>
+    <rect x="1" y="7" width="5" height="1" fill="#008000"/>
+    <rect x="9" y="4" width="3" height="1" fill="#58D858"/>
+    <rect x="9" y="5" width="5" height="2" fill="#00A800"/>
+    <rect x="10" y="7" width="5" height="1" fill="#008000"/>
+    <rect x="6" y="9" width="4" height="2" fill="#008000"/>
+    <rect x="0" y="11" width="16" height="1" fill="#58D858"/>
+    <rect x="0" y="12" width="16" height="4" fill="#C84C0C"/>
+    <rect x="0" y="12" width="16" height="1" fill="#E09850"/>
+    <rect x="2" y="14" width="2" height="1" fill="#904000"/>
+    <rect x="8" y="14" width="3" height="1" fill="#904000"/>
+    <rect x="13" y="13" width="2" height="1" fill="#904000"/>
   </symbol>
 
   <symbol id="sprite-bobomb" viewBox="0 0 16 16" shape-rendering="crispEdges">
+    <rect x="10" y="0" width="2" height="1" fill="#FCFCA0"/>
     <rect x="9" y="1" width="2" height="1" fill="#FCE000"/>
-    <rect x="8" y="2" width="1" height="2" fill="#C87800"/>
+    <rect x="9" y="2" width="1" height="2" fill="#C87800"/>
+    <rect x="8" y="3" width="1" height="2" fill="#906000"/>
+    <rect x="5" y="4" width="6" height="1" fill="#403830"/>
     <rect x="4" y="5" width="8" height="1" fill="#201808"/>
-    <rect x="3" y="6" width="10" height="7" fill="#201808"/>
-    <rect x="4" y="13" width="8" height="1" fill="#201808"/>
-    <rect x="5" y="8" width="2" height="2" fill="#FCFCFC"/>
-    <rect x="9" y="8" width="2" height="2" fill="#FCFCFC"/>
-    <rect x="2" y="10" width="1" height="3" fill="#FCE000"/>
-    <rect x="13" y="10" width="1" height="3" fill="#FCE000"/>
+    <rect x="3" y="6" width="10" height="6" fill="#201808"/>
+    <rect x="4" y="6" width="3" height="3" fill="#403830"/>
+    <rect x="4" y="12" width="8" height="1" fill="#000000"/>
+    <rect x="5" y="13" width="6" height="1" fill="#000000"/>
+    <rect x="4" y="8" width="3" height="3" fill="#FCFCFC"/>
+    <rect x="9" y="8" width="3" height="3" fill="#FCFCFC"/>
+    <rect x="5" y="9" width="1" height="2" fill="#201808"/>
+    <rect x="10" y="9" width="1" height="2" fill="#201808"/>
+    <rect x="1" y="9" width="2" height="4" fill="#FCE000"/>
+    <rect x="13" y="9" width="2" height="4" fill="#FCE000"/>
+    <rect x="1" y="9" width="1" height="2" fill="#FCFCA0"/>
+    <rect x="4" y="14" width="3" height="2" fill="#FCE000"/>
+    <rect x="9" y="14" width="3" height="2" fill="#FCE000"/>
   </symbol>
 
   <symbol id="sprite-potion" viewBox="0 0 16 24" shape-rendering="crispEdges">
-    <rect x="6" y="2" width="4" height="3" fill="#C87800"/>
-    <rect x="5" y="5" width="6" height="2" fill="#E09850"/>
-    <rect x="4" y="7" width="8" height="3" fill="#FCFCFC"/>
-    <rect x="3" y="10" width="10" height="11" fill="#A800A8"/>
-    <rect x="4" y="21" width="8" height="1" fill="#780078"/>
-    <rect x="5" y="12" width="2" height="2" fill="#F878F8"/>
+    <rect x="6" y="1" width="4" height="2" fill="#906000"/>
+    <rect x="6" y="1" width="1" height="2" fill="#C87800"/>
+    <rect x="5" y="3" width="6" height="1" fill="#C87800"/>
+    <rect x="6" y="4" width="4" height="3" fill="#B8D0F8"/>
+    <rect x="6" y="4" width="1" height="3" fill="#FCFCFC"/>
+    <rect x="4" y="7" width="8" height="2" fill="#B8D0F8"/>
+    <rect x="3" y="9" width="10" height="2" fill="#D8E8FC"/>
+    <rect x="2" y="11" width="12" height="10" fill="#B8D0F8"/>
+    <rect x="3" y="12" width="10" height="9" fill="#A800A8"/>
+    <rect x="3" y="12" width="2" height="9" fill="#F878F8"/>
+    <rect x="10" y="12" width="3" height="9" fill="#780078"/>
+    <rect x="4" y="14" width="2" height="2" fill="#FCFCFC"/>
+    <rect x="2" y="21" width="12" height="2" fill="#780078"/>
+    <rect x="3" y="23" width="10" height="1" fill="#500050"/>
   </symbol>
 
+  <!-- ============================ SCENERY ============================ -->
+
   <symbol id="sprite-cloud" viewBox="0 0 32 16" shape-rendering="crispEdges">
-    <rect x="8" y="3" width="6" height="3" fill="#FCFCFC"/>
-    <rect x="16" y="4" width="6" height="2" fill="#FCFCFC"/>
-    <rect x="4" y="6" width="24" height="4" fill="#FCFCFC"/>
-    <rect x="2" y="8" width="28" height="3" fill="#FCFCFC"/>
-    <rect x="2" y="11" width="28" height="1" fill="#B8D0F8"/>
+    <rect x="9" y="2" width="6" height="1" fill="#FCFCFC"/>
+    <rect x="7" y="3" width="10" height="2" fill="#FCFCFC"/>
+    <rect x="17" y="4" width="7" height="1" fill="#FCFCFC"/>
+    <rect x="5" y="5" width="22" height="2" fill="#FCFCFC"/>
+    <rect x="3" y="7" width="26" height="3" fill="#FCFCFC"/>
+    <rect x="2" y="10" width="28" height="2" fill="#E0E8FC"/>
+    <rect x="4" y="12" width="24" height="1" fill="#B8D0F8"/>
+    <rect x="8" y="4" width="4" height="2" fill="#FFFFFF"/>
+  </symbol>
+
+  <symbol id="sprite-cloud-small" viewBox="0 0 24 12" shape-rendering="crispEdges">
+    <rect x="8" y="2" width="6" height="2" fill="#FCFCFC"/>
+    <rect x="5" y="4" width="14" height="2" fill="#FCFCFC"/>
+    <rect x="3" y="6" width="18" height="2" fill="#FCFCFC"/>
+    <rect x="3" y="8" width="18" height="1" fill="#E0E8FC"/>
+    <rect x="5" y="9" width="14" height="1" fill="#B8D0F8"/>
   </symbol>
 
   <symbol id="sprite-cactus" viewBox="0 0 16 24" shape-rendering="crispEdges">
-    <rect x="6" y="2" width="4" height="22" fill="#00A800"/>
-    <rect x="2" y="8" width="4" height="2" fill="#00A800"/>
-    <rect x="2" y="10" width="2" height="6" fill="#00A800"/>
+    <rect x="6" y="1" width="4" height="23" fill="#00A800"/>
+    <rect x="6" y="1" width="1" height="23" fill="#58D858"/>
+    <rect x="9" y="2" width="1" height="22" fill="#008000"/>
+    <rect x="2" y="7" width="4" height="2" fill="#00A800"/>
+    <rect x="2" y="7" width="4" height="1" fill="#58D858"/>
+    <rect x="2" y="9" width="2" height="7" fill="#00A800"/>
+    <rect x="2" y="9" width="1" height="7" fill="#58D858"/>
     <rect x="10" y="12" width="4" height="2" fill="#00A800"/>
-    <rect x="12" y="14" width="2" height="5" fill="#00A800"/>
-    <rect x="6" y="2" width="1" height="22" fill="#008000"/>
+    <rect x="10" y="12" width="4" height="1" fill="#58D858"/>
+    <rect x="12" y="14" width="2" height="6" fill="#00A800"/>
+    <rect x="12" y="14" width="1" height="6" fill="#58D858"/>
+    <rect x="7" y="4" width="1" height="1" fill="#FCFCFC"/>
+    <rect x="7" y="10" width="1" height="1" fill="#FCFCFC"/>
+    <rect x="7" y="17" width="1" height="1" fill="#FCFCFC"/>
+    <rect x="3" y="11" width="1" height="1" fill="#FCFCFC"/>
+  </symbol>
+
+  <symbol id="sprite-pyramid" viewBox="0 0 48 32" shape-rendering="crispEdges">
+    <rect x="22" y="2" width="4" height="2" fill="#F0C078"/>
+    <rect x="20" y="4" width="8" height="3" fill="#F0C078"/>
+    <rect x="17" y="7" width="14" height="4" fill="#F0C078"/>
+    <rect x="13" y="11" width="22" height="4" fill="#F0C078"/>
+    <rect x="9" y="15" width="30" height="5" fill="#F0C078"/>
+    <rect x="4" y="20" width="40" height="6" fill="#F0C078"/>
+    <rect x="0" y="26" width="48" height="6" fill="#F0C078"/>
+    <rect x="24" y="2" width="2" height="2" fill="#C89048"/>
+    <rect x="24" y="4" width="4" height="3" fill="#C89048"/>
+    <rect x="24" y="7" width="7" height="4" fill="#C89048"/>
+    <rect x="24" y="11" width="11" height="4" fill="#C89048"/>
+    <rect x="24" y="15" width="15" height="5" fill="#C89048"/>
+    <rect x="24" y="20" width="20" height="6" fill="#C89048"/>
+    <rect x="24" y="26" width="24" height="6" fill="#C89048"/>
+    <rect x="20" y="26" width="8" height="6" fill="#906030"/>
+    <rect x="21" y="27" width="6" height="5" fill="#201808"/>
+  </symbol>
+
+  <symbol id="sprite-dune" viewBox="0 0 64 16" shape-rendering="crispEdges">
+    <rect x="24" y="2" width="12" height="2" fill="#F0C078"/>
+    <rect x="16" y="4" width="28" height="3" fill="#F0C078"/>
+    <rect x="8" y="7" width="46" height="4" fill="#F0C078"/>
+    <rect x="0" y="11" width="64" height="5" fill="#F0C078"/>
+    <rect x="30" y="2" width="6" height="2" fill="#D8A860"/>
+    <rect x="34" y="4" width="10" height="3" fill="#D8A860"/>
+    <rect x="42" y="7" width="12" height="4" fill="#D8A860"/>
+    <rect x="50" y="11" width="14" height="5" fill="#D8A860"/>
+  </symbol>
+
+  <symbol id="sprite-bush" viewBox="0 0 24 12" shape-rendering="crispEdges">
+    <rect x="9" y="2" width="5" height="2" fill="#58D858"/>
+    <rect x="5" y="4" width="14" height="2" fill="#00A800"/>
+    <rect x="5" y="4" width="7" height="1" fill="#58D858"/>
+    <rect x="2" y="6" width="20" height="3" fill="#00A800"/>
+    <rect x="2" y="9" width="20" height="3" fill="#008000"/>
+    <rect x="16" y="6" width="6" height="3" fill="#008000"/>
   </symbol>
 
   <symbol id="sprite-shyguy" viewBox="0 0 16 16" shape-rendering="crispEdges">
-    <rect x="5" y="1" width="6" height="2" fill="#D82800"/>
-    <rect x="4" y="3" width="8" height="5" fill="#F87858"/>
-    <rect x="6" y="5" width="1" height="2" fill="#201808"/>
-    <rect x="9" y="5" width="1" height="2" fill="#201808"/>
-    <rect x="4" y="8" width="8" height="5" fill="#D82800"/>
-    <rect x="3" y="9" width="1" height="3" fill="#F87858"/>
-    <rect x="12" y="9" width="1" height="3" fill="#F87858"/>
-    <rect x="5" y="13" width="2" height="2" fill="#201808"/>
-    <rect x="9" y="13" width="2" height="2" fill="#201808"/>
+    <rect x="5" y="0" width="6" height="1" fill="#A80000"/>
+    <rect x="4" y="1" width="8" height="2" fill="#D82800"/>
+    <rect x="4" y="1" width="3" height="1" fill="#F87858"/>
+    <rect x="3" y="3" width="10" height="5" fill="#F8B888"/>
+    <rect x="3" y="3" width="10" height="1" fill="#FCD8B0"/>
+    <rect x="12" y="4" width="1" height="4" fill="#D8A070"/>
+    <rect x="5" y="4" width="2" height="2" fill="#201808"/>
+    <rect x="9" y="4" width="2" height="2" fill="#201808"/>
+    <rect x="6" y="6" width="4" height="1" fill="#D8A070"/>
+    <rect x="3" y="8" width="10" height="5" fill="#D82800"/>
+    <rect x="3" y="8" width="10" height="1" fill="#F87858"/>
+    <rect x="11" y="9" width="2" height="4" fill="#A80000"/>
+    <rect x="1" y="9" width="2" height="3" fill="#F8B888"/>
+    <rect x="13" y="9" width="2" height="3" fill="#D8A070"/>
+    <rect x="4" y="13" width="3" height="3" fill="#0058F8"/>
+    <rect x="9" y="13" width="3" height="3" fill="#0040C0"/>
   </symbol>
 
   <symbol id="sprite-star" viewBox="0 0 16 16" shape-rendering="crispEdges">
-    <rect x="7" y="1" width="2" height="3" fill="#FCE000"/>
-    <rect x="6" y="4" width="4" height="2" fill="#FCE000"/>
-    <rect x="1" y="6" width="14" height="2" fill="#FCE000"/>
-    <rect x="3" y="8" width="10" height="3" fill="#FCE000"/>
-    <rect x="4" y="11" width="3" height="4" fill="#FCE000"/>
-    <rect x="9" y="11" width="3" height="4" fill="#FCE000"/>
-    <rect x="5" y="7" width="2" height="2" fill="#201808"/>
-    <rect x="9" y="7" width="2" height="2" fill="#201808"/>
+    <rect x="7" y="0" width="2" height="2" fill="#FCFCA0"/>
+    <rect x="6" y="2" width="4" height="2" fill="#FCE000"/>
+    <rect x="5" y="4" width="6" height="2" fill="#FCE000"/>
+    <rect x="0" y="6" width="16" height="2" fill="#FCE000"/>
+    <rect x="0" y="6" width="8" height="1" fill="#FCFCA0"/>
+    <rect x="2" y="8" width="12" height="3" fill="#FCE000"/>
+    <rect x="3" y="11" width="4" height="4" fill="#FCE000"/>
+    <rect x="9" y="11" width="4" height="4" fill="#FCE000"/>
+    <rect x="9" y="8" width="5" height="3" fill="#C87800"/>
+    <rect x="9" y="11" width="4" height="4" fill="#C87800"/>
+    <rect x="4" y="7" width="2" height="3" fill="#201808"/>
+    <rect x="10" y="7" width="2" height="3" fill="#201808"/>
   </symbol>
 
 </svg>

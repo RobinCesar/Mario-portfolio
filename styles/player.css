@@ -1,0 +1,116 @@
+/* ---------------------------------------------------------------- stage --
+   The play layer sits fixed over the page. The character stays put while the
+   page scrolls underneath, so walking right advances through the CV. */
+
+.stage {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+}
+.stage[hidden] { display: none; }
+
+.stage__ground {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--play-ground);
+  background:
+    repeating-linear-gradient(90deg,
+      var(--ground) 0 12px, #A83C08 12px 24px) bottom / 100% 0.75rem no-repeat,
+    var(--sand);
+  border-top: var(--pixel) solid var(--pipe);
+  box-shadow: 0 -0.5rem 0 rgba(32, 24, 8, 0.12);
+}
+
+.player {
+  position: absolute;
+  bottom: var(--play-ground);
+  left: 0;
+  width: 44px;
+  height: 55px;
+  image-rendering: pixelated;
+  transform-origin: 50% 100%;
+  will-change: transform;
+}
+
+/* Sections need clearance so the ground band never covers the last line. */
+html[data-playing='on'] .footer { padding-bottom: calc(var(--play-ground) + 2rem); }
+
+/* ------------------------------------------------------------- controls --
+   Touch D-pad. Hidden until the game starts and on devices with a mouse. */
+
+.dpad {
+  position: fixed;
+  z-index: 45;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  justify-content: space-between;
+  padding: var(--space-1);
+  pointer-events: none;
+}
+.dpad button {
+  pointer-events: auto;
+  width: 3.5rem;
+  height: 3.5rem;
+  background: rgba(32, 24, 8, 0.75);
+  border: var(--pixel) solid var(--paper);
+  color: var(--paper);
+  font-size: 1rem;
+  touch-action: none;
+}
+.dpad button[data-input='action'] { margin-left: auto; margin-right: var(--space-1); }
+
+html[data-playing='on'] .dpad[hidden] { display: none; }
+
+@media (hover: none) and (pointer: coarse) {
+  html[data-playing='on'] .dpad { display: flex; }
+}
+
+/* ---------------------------------------------------------------- intro --
+   Press Start: the title flashes, the screen wipes, then play begins. */
+
+html[data-intro='on'] #title h1 {
+  animation: title-pop 400ms steps(4) 2;
+}
+html[data-intro='on'] .press-start {
+  animation: press-start-flash 150ms steps(2) 8;
+}
+html[data-intro='on'] body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: var(--paper);
+  pointer-events: none;
+  animation: intro-wipe 1.5s ease-in forwards;
+}
+
+@keyframes title-pop {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.12); }
+}
+@keyframes press-start-flash {
+  50% { opacity: 0.1; }
+}
+@keyframes intro-wipe {
+  0%   { opacity: 0; }
+  55%  { opacity: 0.9; }
+  100% { opacity: 0; }
+}
+
+.press-start[aria-disabled='true'] {
+  animation: none;
+  opacity: 0.85;
+  cursor: default;
+  font-size: 0.55rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-intro='on'] #title h1,
+  html[data-intro='on'] .press-start,
+  html[data-intro='on'] body::after { animation: none; }
+}
