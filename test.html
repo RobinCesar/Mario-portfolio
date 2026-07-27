@@ -1,0 +1,19 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Tests — Mario Portfolio</title>
+<style>
+  body { background: #101820; color: #FCFCFC; font: 14px/1.6 ui-monospace, monospace; padding: 2rem; }
+  pre { white-space: pre-wrap; }
+</style>
+<h1>Tests</h1>
+<p>Universal tests only. The content, contrast and sprite suites read files
+from disk — run <code>node tests/run-node.js</code> for those.</p>
+<pre id="output">Running…</pre>
+<script type="module">
+  import { run } from './tests/harness.js';
+  import './tests/all.js';
+
+  const output = document.getElementById('output');
+  output.textContent = '';
+  run((message) => { output.textContent += message + '\n'; });
+</script>

@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Robin Elvius &mdash; Engineering Physics Student &amp; Developer</title>
+<meta name="description" content="Portfolio of Robin Elvius: engineering physics student at Uppsala University, freelance web developer, and builder of a Python prediction-market analysis pipeline.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script>document.documentElement.classList.remove('no-js');</script>
+<link rel="stylesheet" href="styles/tokens.css">
+<link rel="stylesheet" href="styles/layout.css">
+<link rel="stylesheet" href="styles/sprites.css">
+<link rel="stylesheet" href="styles/sections.css">
+</head>
+<body>
+
+<a class="skip-link" href="#about">Skip to content</a>
+
+<header class="hud" id="hud">
+  <p class="hud__hearts" aria-hidden="true">
+    <svg class="sprite" aria-hidden="true" width="16" height="16"><use href="assets/sprites.svg#sprite-heart"></use></svg>
+    <svg class="sprite" aria-hidden="true" width="16" height="16"><use href="assets/sprites.svg#sprite-heart"></use></svg>
+    <svg class="sprite" aria-hidden="true" width="16" height="16"><use href="assets/sprites.svg#sprite-heart"></use></svg>
+  </p>
+  <p class="hud__coins">
+    <svg class="sprite" aria-hidden="true" width="16" height="16"><use href="assets/sprites.svg#sprite-coin"></use></svg>
+    <span class="hud__coin-count">0</span>
+    <span class="visually-hidden">coins collected</span>
+  </p>
+  <p class="hud__cherries">
+    <svg class="sprite" aria-hidden="true" width="16" height="16"><use href="assets/sprites.svg#sprite-cherry"></use></svg>
+    <span class="hud__cherry-count">0</span>/5
+    <span class="visually-hidden">cherries found</span>
+  </p>
+  <button type="button" id="sound-toggle" aria-pressed="false">Sound: off</button>
+  <a class="hud__plain-cv" href="CV__V_2_.pdf">Plain CV</a>
+</header>
+
+<main>
+
+<section id="title" class="section section--title">
+  <div class="scenery" aria-hidden="true">
+    <svg class="sprite sprite--cloud" aria-hidden="true" width="32" height="16"><use href="assets/sprites.svg#sprite-cloud"></use></svg>
+    <svg class="sprite sprite--cactus" aria-hidden="true" width="16" height="24"><use href="assets/sprites.svg#sprite-cactus"></use></svg>
+  </div>
+  <h1>Robin Elvius</h1>
+  <p class="subtitle">Engineering physics student &amp; developer &mdash; Uppsala, Sweden</p>
+  <a class="press-start" href="#about">Press Start</a>
+</section>
+
+<section id="about" class="section">
+  <h2>About</h2>
+  <p>
+    Engineering physics student at Uppsala University with broad experience in sales,
+    marketing and business management, plus practical web development experience.
+    I combine a technical foundation &mdash; Python, Git, LaTeX, HTML/CSS/JavaScript &mdash; with
+    the ability to drive projects and own client relationships.
+  </p>
+  <ul class="qblocks">
+    <li>
+      <button type="button" class="qblock" data-reveal="Studying engineering physics at Uppsala University since 2024.">
+        <svg class="sprite" aria-hidden="true" width="24" height="24"><use href="assets/sprites.svg#sprite-question-block"></use></svg>
+        <span class="visually-hidden">Reveal: studies</span>
+      </button>
+      <span class="qblock__reveal" hidden>Studying engineering physics at Uppsala University since 2024.</span>
+      <button type="button" class="cherry" data-cherry-id="about-block" hidden>
+        <svg class="sprite" aria-hidden="true" width="16" height="16"><use href="assets/sprites.svg#sprite-cherry"></use></svg>
+        <span class="visually-hidden">Collect cherry</span>
+      </button>
+    </li>
+    <li>
+      <button type="button" class="qblock" data-reveal="Python is my main language &mdash; data pipelines, analysis, automation.">
+        <svg class="sprite" aria-hidden="true" width="24" height="24"><use href="assets/sprites.svg#sprite-question-block"></use></svg>
+        <span class="visually-hidden">Reveal: Python</span>
+      </button>
+      <span class="qblock__reveal" hidden>Python is my main language &mdash; data pipelines, analysis, automation.</span>
+    </li>
+    <li>
+      <button type="button" class="qblock" data-reveal="Freelance web developer running my own firm since June 2026.">
+        <svg class="sprite" aria-hidden="true" width="24" height="24"><use href="assets/sprites.svg#sprite-question-block"></use></svg>
+        <span class="visually-hidden">Reveal: consulting</span>
+      </button>
+      <span class="qblock__reveal" hidden>Freelance web developer running my own firm since June 2026.</span>
+    </li>
+  </ul>
+  <button type="button" id="potion" aria-pressed="false">
+    <svg class="sprite" aria-hidden="true" width="16" height="24"><use href="assets/sprites.svg#sprite-potion"></use></svg>
+    <span class="potion__label">Throw potion</span>
+  </button>
+</section>
+
+<section id="projects" class="section">
+  <h2>Projects</h2>
+  <article class="boss-card">
+    <h3>Prediction market analysis tool <span class="boss-card__year">2026</span></h3>
+    <p class="boss-card__lede">A Python system for finding mispriced markets on Polymarket.</p>
+    <ul>
+      <li>
+        Collects market data through public APIs, analyses historical mispricing
+        (calibration), and runs several automated paper trading strategies derived
+        from the results.
+      </li>
+      <li>
+        The whole pipeline &mdash; data collection, statistical analysis and simulated
+        trading &mdash; is version controlled with Git and runs continuously on a server.
+      </li>
+    </ul>
+    <p class="boss-card__stack">Python &middot; Git &middot; REST APIs &middot; statistical analysis</p>
+    <button type="button" class="cherry" data-cherry-id="projects-arena">
+      <svg class="sprite" aria-hidden="true" width="16" height="16"><use href="assets/sprites.svg#sprite-cherry"></use></svg>
+      <span class="visually-hidden">Collect cherry</span>
+    </button>
+  </article>
+</section>
+
+<section id="experience" class="section">
+  <h2>Experience</h2>
+  <ul class="doors">
+
+    <li>
+      <button type="button" class="door" aria-expanded="false" aria-controls="door-1">
+        <svg class="sprite" aria-hidden="true" width="24" height="32"><use href="assets/sprites.svg#sprite-door"></use></svg>
+        <span class="door__role">Developer (Consultant)</span>
+        <span class="door__where">Own firm, incl. assignments from Guidelight</span>
+        <time class="door__when" datetime="2026-06">2026/06 &ndash; Present</time>
+      </button>
+      <div class="door__panel" id="door-1">
+        <ul>
+          <li>Built and maintained websites for clients in the moving industry, bridal wear and naprapathy, using WordPress, Shopify and HTML/CSS/JavaScript.</li>
+          <li>Owned the full client relationship, from needs analysis through delivery to support.</li>
+        </ul>
+      </div>
+    </li>
+
+    <li>
+      <button type="button" class="door" aria-expanded="false" aria-controls="door-2">
+        <svg class="sprite" aria-hidden="true" width="24" height="32"><use href="assets/sprites.svg#sprite-door"></use></svg>
+        <span class="door__role">Marketing and Finance Manager</span>
+        <span class="door__where">Elvius Betongvaror, Uppsala</span>
+        <time class="door__when" datetime="2024-05">2024/05 &ndash; Present</time>
+      </button>
+      <div class="door__panel" id="door-2">
+        <ul>
+          <li>Produced the company's marketing plan and competitor analysis.</li>
+          <li>Responsible for budget, ongoing bookkeeping and annual accounts.</li>
+          <li>Ran the co-owners' regular meetings and acted as secretary.</li>
+        </ul>
+      </div>
+    </li>
+
+    <li>
+      <button type="button" class="door" aria-expanded="false" aria-controls="door-3">
+        <svg class="sprite" aria-hidden="true" width="24" height="32"><use href="assets/sprites.svg#sprite-door"></use></svg>
+        <span class="door__role">Meeting Booker</span>
+        <span class="door__where">Gimlit, Uppsala</span>
+        <time class="door__when" datetime="2023-11">2023/11 &ndash; 2024/01</time>
+      </button>
+      <div class="door__panel" id="door-3">
+        <ul>
+          <li>Cold called companies to book sales meetings about web services.</li>
+          <li>Regularly booked new meetings for the sales organisation.</li>
+        </ul>
+      </div>
+    </li>
+
+    <li>
+      <button type="button" class="door" aria-expanded="false" aria-controls="door-4">
+        <svg class="sprite" aria-hidden="true" width="24" height="32"><use href="assets/sprites.svg#sprite-door"></use></svg>
+        <span class="door__role">Telesales Agent</span>
+        <span class="door__where">Lingon Mobil, Uppsala</span>
+        <time class="door__when" datetime="2023-09">2023/09 &ndash; 2023/10</time>
+      </button>
+      <div class="door__panel" id="door-4">
+        <ul>
+          <li>Cold called new and former customers to sell and renew mobile subscriptions.</li>
+          <li>Repeatedly finished in the top percentile of sellers in the office.</li>
+        </ul>
+      </div>
+    </li>
+
+    <li>
+      <button type="button" class="door" aria-expanded="false" aria-controls="door-5">
+        <svg class="sprite" aria-hidden="true" width="24" height="32"><use href="assets/sprites.svg#sprite-door"></use></svg>
+        <span class="door__role">Salesperson and CEO</span>
+        <span class="door__where">LupinusUF, Uppsala</span>
+        <time class="door__when" datetime="2022-08">2022/08 &ndash; 2023/06</time>
+      </button>
+      <div class="door__panel" id="door-5">
+        <ul>
+          <li>Developed packaging and marketing material in the Adobe suite.</li>
+          <li>Sold out the entire stock &mdash; around 50 protein bars &mdash; at the UF fair through active sales technique.</li>
+          <li>Marketed the product through social media.</li>
+        </ul>
+        <p class="door__note">UF (Ung Företagsamhet) is Sweden's school entrepreneurship programme, where students run a real company for one academic year.</p>
+      </div>
+    </li>
+
+    <li>
+      <button type="button" class="door" aria-expanded="false" aria-controls="door-6">
+        <svg class="sprite" aria-hidden="true" width="24" height="32"><use href="assets/sprites.svg#sprite-door"></use></svg>
+        <span class="door__role">Park Worker</span>
+        <span class="door__where">Uppsala Municipality</span>
+        <time class="door__when" datetime="2020-07">2020/07 &ndash; 2020/08</time>
+      </button>
+      <div class="door__panel" id="door-6">
+        <ul>
+          <li>Cleaned and maintained parks and public spaces in and around Uppsala.</li>
+        </ul>
+        <button type="button" class="cherry" data-cherry-id="oldest-door">
+          <svg class="sprite" aria-hidden="true" width="16" height="16"><use href="assets/sprites.svg#sprite-cherry"></use></svg>
+          <span class="visually-hidden">Collect cherry</span>
+        </button>
+      </div>
+    </li>
+
+  </ul>
+</section>
+
+<section id="education" class="section">
+  <h2>Education</h2>
+  <ul class="plaques">
+    <li class="plaque">
+      <h3>MSc in Engineering Physics</h3>
+      <p class="plaque__where">Uppsala University</p>
+      <time datetime="2024">2024 &ndash; 2029 (ongoing)</time>
+    </li>
+    <li class="plaque">
+      <h3>Introduction to AI</h3>
+      <p class="plaque__where">Luleå University of Technology &mdash; 7.5 credits</p>
+      <p>Fundamentals, machine learning, reasoning and practical applications.</p>
+      <time datetime="2026">2026</time>
+    </li>
+    <li class="plaque">
+      <h3>Cybersecurity &mdash; Fundamentals and Awareness</h3>
+      <p class="plaque__where">Linköping University &mdash; 3 credits</p>
+      <time datetime="2026">2026</time>
+    </li>
+    <li class="plaque">
+      <h3>Commercial Law: Introductory Law Course</h3>
+      <p class="plaque__where">Stockholm University &mdash; 15 credits</p>
+      <time datetime="2026">2026</time>
+    </li>
+    <li class="plaque">
+      <h3>Natural Science Programme</h3>
+      <p class="plaque__where">Katedralskolan Uppsala</p>
+      <time datetime="2020">2020 &ndash; 2023</time>
+    </li>
+  </ul>
+  <button type="button" class="cherry cherry--subspace" data-cherry-id="education-subspace" hidden>
+    <svg class="sprite" aria-hidden="true" width="16" height="16"><use href="assets/sprites.svg#sprite-cherry"></use></svg>
+    <span class="visually-hidden">Collect hidden cherry</span>
+  </button>
+</section>
+
+<section id="skills" class="section">
+  <h2>Skills</h2>
+  <p class="languages">Languages: <strong>Swedish and English</strong> (fluent).</p>
+  <p class="skills__hint">Drag a sprout upward, or focus it and press Enter, to pull it out.</p>
+  <ul class="sprouts">
+    <li>
+      <button type="button" class="sprout" data-skill="Python" aria-expanded="false">
+        <svg class="sprite" aria-hidden="true" width="16" height="16"><use href="assets/sprites.svg#sprite-sprout"></use></svg>
+        <span class="sprout__name">Python</span>
+      </button>
+      <span class="sprout__detail" hidden>Primary language. Powers the Polymarket data and analysis pipeline.</span>
+    </li>
+    <li>
+      <button type="button" class="sprout" data-skill="Git" aria-expanded="false">
+        <svg class="sprite" aria-hidden="true" width="16" height="16"><use href="assets/sprites.svg#sprite-sprout"></use></svg>
+        <span class="sprout__name">Git</span>
+      </button>
+      <span class="sprout__detail" hidden>Version control across every project, including this site.</span>
+    </li>
+    <li>
+      <button type="button" class="sprout" data-skill="Web" aria-expanded="false">
+        <svg class="sprite" aria-hidden="true" width="16" height="16"><use href="assets/sprites.svg#sprite-sprout"></use></svg>
+        <span class="sprout__name">HTML, CSS, JavaScript</span>
+      </button>
+      <span class="sprout__detail" hidden>Client websites, WordPress and Shopify work, and this page.</span>
+    </li>
+    <li>
+      <button type="button" class="sprout" data-skill="LaTeX" aria-expanded="false">
+        <svg class="sprite" aria-hidden="true" width="16" height="16"><use href="assets/sprites.svg#sprite-sprout"></use></svg>
+        <span class="sprout__name">LaTeX</span>
+      </button>
+      <span class="sprout__detail" hidden>Academic reports and typesetting, including my CV.</span>
+    </li>
+    <li>
+      <button type="button" class="sprout" data-skill="Office" aria-expanded="false">
+        <svg class="sprite" aria-hidden="true" width="16" height="16"><use href="assets/sprites.svg#sprite-sprout"></use></svg>
+        <span class="sprout__name">Microsoft 365</span>
+      </button>
+      <span class="sprout__detail" hidden>Office suite &mdash; used daily for bookkeeping and reporting.</span>
+    </li>
+    <li>
+      <button type="button" class="sprout" data-skill="Business" aria-expanded="false">
+        <svg class="sprite" aria-hidden="true" width="16" height="16"><use href="assets/sprites.svg#sprite-sprout"></use></svg>
+        <span class="sprout__name">Sales &amp; business management</span>
+      </button>
+      <span class="sprout__detail" hidden>Marketing plans, competitor analysis, budgets and bookkeeping.</span>
+    </li>
+    <li>
+      <button type="button" class="sprout sprout--bobomb" data-skill="bobomb" aria-expanded="false">
+        <svg class="sprite" aria-hidden="true" width="16" height="16"><use href="assets/sprites.svg#sprite-bobomb"></use></svg>
+        <span class="sprout__name visually-hidden">A Bob-omb</span>
+      </button>
+      <span class="sprout__detail" hidden>That was a Bob-omb, not a vegetable.</span>
+    </li>
+  </ul>
+</section>
+
+<section id="contact" class="section">
+  <h2>Get in touch</h2>
+  <div class="slot">
+    <ul class="slot__reels">
+      <li class="slot__reel">
+        <a href="mailto:robin.c.elvius@gmail.com">
+          <span class="slot__symbol" aria-hidden="true">&#9993;</span>
+          robin.c.elvius@gmail.com
+        </a>
+      </li>
+      <li class="slot__reel">
+        <a href="https://www.linkedin.com/in/robin-elvius-132368252">
+          <span class="slot__symbol" aria-hidden="true">in</span>
+          LinkedIn
+        </a>
+      </li>
+      <li class="slot__reel">
+        <a href="CV__V_2_.pdf">
+          <span class="slot__symbol" aria-hidden="true">&#9636;</span>
+          Download CV (PDF)
+        </a>
+      </li>
+    </ul>
+    <button type="button" id="slot-lever">
+      <span class="visually-hidden">Spin the reels</span>
+      <span aria-hidden="true">&#9660;</span>
+    </button>
+    <button type="button" class="cherry" data-cherry-id="slot-chassis">
+      <svg class="sprite" aria-hidden="true" width="16" height="16"><use href="assets/sprites.svg#sprite-cherry"></use></svg>
+      <span class="visually-hidden">Collect cherry</span>
+    </button>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <p>Built by Robin Elvius with plain HTML, CSS and JavaScript. Pixel art is original work &mdash; an homage to Super Mario Bros 2, not affiliated with Nintendo.</p>
+</footer>
+
+<script type="module" src="scripts/main.js"></script>
+</body>
+</html>

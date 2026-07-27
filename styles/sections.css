@@ -1,0 +1,208 @@
+.press-start {
+  display: inline-block;
+  margin-top: var(--space-3);
+  padding: var(--space-1) var(--space-2);
+  background: var(--panel);
+  border: var(--pixel) solid var(--panel-edge);
+  color: var(--text);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  animation: press-start-blink 1.4s steps(2) infinite;
+}
+/* Kept shallow so the label stays legible through the dim half of the blink. */
+@keyframes press-start-blink { 50% { opacity: 0.6; } }
+
+.subtitle { font-size: 1.1rem; max-width: 30rem; }
+
+.qblocks, .doors, .plaques, .sprouts, .slot__reels {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.qblocks { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-3); }
+.qblocks li { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-1); max-width: 16rem; }
+.qblock { background: none; border: 0; padding: 0; cursor: pointer; }
+.qblock__reveal { font-family: var(--font-body); font-size: 0.9rem; }
+
+#potion {
+  margin-top: var(--space-3);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  background: var(--panel);
+  border: var(--pixel) solid var(--panel-edge);
+  color: var(--text);
+  padding: var(--space-1) var(--space-2);
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+
+.boss-card {
+  position: relative;
+  background: var(--panel-raised);
+  border: var(--pixel) solid var(--panel-edge);
+  padding: var(--space-3);
+}
+.boss-card__year { float: right; font-size: 0.7rem; }
+.boss-card__lede { font-size: 1.1rem; font-weight: 600; }
+.boss-card__stack { font-family: var(--font-display); font-size: 0.6rem; }
+
+.doors li { border-bottom: 2px solid var(--panel-edge); }
+.door {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: 'icon role when' 'icon where when';
+  gap: 0 var(--space-2);
+  align-items: center;
+  width: 100%;
+  padding: var(--space-2) 0;
+  background: none;
+  border: 0;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+}
+.door .sprite { grid-area: icon; }
+.door__role  { grid-area: role; font-size: 0.8rem; }
+.door__where { grid-area: where; font-family: var(--font-body); font-size: 0.9rem; }
+.door__when  { grid-area: when; font-size: 0.6rem; }
+.door__panel { padding: 0 0 var(--space-2) var(--space-4); }
+.door__note { font-size: 0.85rem; font-style: italic; }
+
+.plaques { display: grid; gap: var(--space-2); grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+.plaque {
+  background: var(--panel-raised);
+  border: var(--pixel) solid var(--panel-edge);
+  padding: var(--space-2);
+}
+/* Long course names wrap badly in pixel type at the global h3 size. */
+.plaque h3 { margin: 0 0 var(--space-1); font-size: 0.7rem; line-height: 1.7; }
+.plaque p { margin: 0; }
+.plaque__where { font-weight: 600; }
+.plaque time { font-size: 0.85rem; }
+
+.languages { font-size: 1.05rem; }
+.skills__hint { font-size: 0.9rem; opacity: 0.85; }
+/* Each sprout gets its own plot of soil, so every one looks planted no matter
+   how the row wraps. */
+.sprouts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+.sprouts li {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--space-1);
+  flex: 1 1 14rem;
+  max-width: 18rem;
+  padding-top: var(--space-1);
+}
+.sprouts li::after {
+  content: '';
+  display: block;
+  height: 1.25rem;
+  margin-top: var(--space-1);
+  background: var(--ground);
+  border-top: var(--pixel) solid var(--pipe);
+}
+.sprout {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  background: none;
+  border: 0;
+  color: var(--text);
+  font-size: 0.7rem;
+  text-align: left;
+  cursor: grab;
+  touch-action: none;
+  transition: transform 120ms ease-out;
+}
+.sprout[aria-expanded='true'] { cursor: default; }
+.sprout__detail { font-family: var(--font-body); font-size: 0.9rem; }
+
+.slot {
+  position: relative;
+  background: var(--panel);
+  border: var(--pixel) solid var(--panel-edge);
+  padding: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.slot__reels { display: flex; flex: 1; gap: var(--space-2); }
+.slot__reel {
+  flex: 1;
+  background: var(--text);
+  color: var(--text-invert);
+  padding: var(--space-2);
+  text-align: center;
+  overflow: hidden;
+}
+.slot__reel a { color: inherit; display: block; font-size: 0.85rem; word-break: break-word; }
+.slot__symbol { display: block; font-size: 1.5rem; }
+.slot__reel--spinning { animation: reel-spin 120ms steps(2) infinite; }
+@keyframes reel-spin { 50% { transform: translateY(-0.5rem); opacity: 0.6; } }
+
+#slot-lever {
+  background: var(--panel-edge);
+  border: var(--pixel) solid var(--text);
+  color: var(--text-invert);
+  padding: var(--space-2);
+  cursor: pointer;
+}
+
+.cherry { background: none; border: 0; padding: 0; cursor: pointer; line-height: 0; }
+.cherry[hidden] { display: none; }
+/* Cherries tucked into a corner of their host card rather than floating loose. */
+.boss-card > .cherry,
+.slot > .cherry { position: absolute; right: var(--space-1); bottom: var(--space-1); }
+
+/* Colour cycling is capped at 3 Hz. Faster flashing is a seizure risk, so the
+   step count and duration below must not be increased. */
+@keyframes starman-cycle {
+  0%   { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+html[data-starman='on'] body {
+  animation: starman-cycle 1.5s steps(4) infinite;
+}
+
+/* Reduced-motion visitors get a static gold tint and the banner instead. */
+html[data-starman='static'] body {
+  filter: sepia(0.6) saturate(1.6) hue-rotate(-15deg);
+}
+
+.starman-banner {
+  position: fixed;
+  left: 50%;
+  bottom: var(--space-3);
+  transform: translateX(-50%);
+  z-index: 60;
+  margin: 0;
+  padding: var(--space-1) var(--space-2);
+  background: var(--ink);
+  color: #FCE000;
+  border: var(--pixel) solid #FCE000;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+.starman-banner .sprite { width: 1.25rem; height: 1.25rem; }
+
+@media (max-width: 768px) {
+  .door { grid-template-columns: auto 1fr; grid-template-areas: 'icon role' 'icon where' 'icon when'; }
+  .door__panel { padding-left: var(--space-3); }
+  .slot { flex-direction: column; }
+  .slot__reels { flex-direction: column; width: 100%; }
+}

@@ -1,0 +1,48 @@
+@font-face {
+  font-family: 'Press Start 2P';
+  src: url('../assets/fonts/PressStart2P.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+}
+
+:root {
+  --sky: #6B8CFF;
+  --sand: #E09850;
+  --ground: #C84C0C;
+  --pipe: #00A800;
+  --ink: #201808;
+  --paper: #FCFCFC;
+
+  --subspace-bg: #101820;
+  --accent: #D82800;
+
+  --bg: var(--sky);
+  --panel: var(--sand);
+  --panel-raised: #F0B878;
+  --panel-edge: var(--ground);
+  --text: var(--ink);
+  --text-invert: var(--paper);
+  --ground-height: 4.5rem;
+
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 2rem;
+  --space-4: 4rem;
+
+  --font-display: 'Press Start 2P', ui-monospace, 'Courier New', monospace;
+  --font-body: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --pixel: 4px;
+  --hud-height: 3rem;
+}
+
+/* Subspace: the dark mode joke. Swaps every semantic token at once. */
+html[data-subspace='on'] {
+  --bg: var(--subspace-bg);
+  --panel: #1C2733;
+  --panel-raised: #26333F;
+  --panel-edge: var(--accent);
+  --text: var(--paper);
+  --text-invert: var(--ink);
+}
