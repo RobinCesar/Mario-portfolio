@@ -58,6 +58,32 @@ reaches into another's internals.
 so the platformer and the keyboard share one code path. Never duplicate an
 interaction's logic inside the player.
 
+### Controls
+
+Bound in one place, `KEY_MAP` in `player.js`, and locked down by tests:
+
+| Input | Does |
+|---|---|
+| `←` `→` / `A` `D` | Walk. At either viewport edge this scrolls instead. |
+| `↑` `↓` / `W` `S` | Scroll the page directly. |
+| `Space` | Jump — nothing else is bound to it. |
+| `E`, or a mouse click | Use whatever is in reach. |
+
+`Space` yields to a focused button so tabbing still works, which is why it is
+special-cased in `onKey`. Everything else drives the character unconditionally.
+
+### Platforms
+
+The top edge of every `PLATFORM_SELECTOR` element is a one-way platform: you
+rise through it and land on it coming down. Rects are re-read every frame
+because the page scrolls underneath, and `LAND_TOLERANCE` absorbs that movement
+— without it the character drops off a ledge the moment the view moves. There is
+no side collision; walking into an element's flank passes through by design.
+
+Anything standable wears `--ledge` on its top edge while playing, so the level
+reads before you walk into it. Keep that pairing: a new platform selector needs
+the highlight, and vice versa.
+
 ### state.js gotcha
 
 `get()` always returns a default, so it cannot tell "stored false" from "never

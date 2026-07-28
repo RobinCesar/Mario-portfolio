@@ -55,6 +55,10 @@
   <h1>Robin Elvius</h1>
   <p class="subtitle">Engineering physics student &amp; developer &mdash; Uppsala, Sweden</p>
   <a class="press-start" href="#about">Press Start</a>
+  <p class="controls">
+    Arrows or WASD &mdash; left and right walk, up and down scroll the page.
+    Space jumps. E, or a click, uses whatever you are standing at.
+  </p>
 </section>
 
 <section id="about" class="section">
@@ -364,14 +368,18 @@
 </div>
 
 <div class="dpad" aria-hidden="true" hidden>
-  <button type="button" data-input="left" tabindex="-1">◀</button>
-  <button type="button" data-input="action" tabindex="-1">▼</button>
-  <button type="button" data-input="right" tabindex="-1">▶</button>
-  <button type="button" data-input="jump" tabindex="-1">▲</button>
+  <div class="dpad__pad">
+    <button type="button" data-input="left" tabindex="-1">◀</button>
+    <button type="button" data-input="right" tabindex="-1">▶</button>
+  </div>
+  <div class="dpad__pad">
+    <button type="button" data-input="action" tabindex="-1">USE</button>
+    <button type="button" data-input="jump" tabindex="-1">JUMP</button>
+  </div>
 </div>
 
 <footer class="footer">
-  <p>Built by Robin Elvius with plain HTML, CSS and JavaScript. Pixel art is original work &mdash; an homage to Super Mario Bros 2, not affiliated with Nintendo.</p>
+  <p>Pixel art is original work &mdash; an homage to Super Mario Bros 2, not affiliated with Nintendo.</p>
 </footer>
 
 <script type="module" src="scripts/main.js"></script>

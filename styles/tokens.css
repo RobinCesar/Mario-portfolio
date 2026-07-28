@@ -17,6 +17,10 @@
   --subspace-bg: #101820;
   --accent: #D82800;
 
+  /* The lit top edge of the ground brickwork. Anything wearing this colour is
+     something the character can stand on, in both colour schemes. */
+  --ledge: #F0C078;
+
   --bg: var(--sky);
   --panel: var(--sand);
   --panel-raised: #F0B878;

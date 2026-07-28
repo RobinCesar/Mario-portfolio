@@ -10,18 +10,31 @@
 }
 .stage[hidden] { display: none; }
 
+/* Desert brickwork, built from hard-stop gradients so it stays crisp at any
+   width: a sunlit crust along the top, then a course-and-joint lattice with
+   every other row offset the way a bonded wall actually runs. */
 .stage__ground {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
   height: var(--play-ground);
-  background:
+  border-top: var(--pixel) solid #904000;
+  background-color: var(--sand);
+  background-image:
+    linear-gradient(180deg, var(--ledge) 0 6px, #E8AC68 6px 10px, transparent 10px),
     repeating-linear-gradient(90deg,
-      var(--ground) 0 12px, #A83C08 12px 24px) bottom / 100% 0.75rem no-repeat,
-    var(--sand);
-  border-top: var(--pixel) solid var(--pipe);
-  box-shadow: 0 -0.5rem 0 rgba(32, 24, 8, 0.12);
+      transparent 0 28px, #B87438 28px 32px),
+    repeating-linear-gradient(180deg,
+      transparent 0 18px, #B87438 18px 22px),
+    linear-gradient(180deg, transparent 0 calc(100% - 8px), #A85C28 calc(100% - 8px));
+  image-rendering: pixelated;
+}
+
+/* Ledges you can actually stand on get a lit top edge, so the level reads
+   before you walk into it. Inset, so nothing shifts when play starts. */
+html[data-playing='on'] :is(.qblock, .plaque, .boss-card, .door, .slot) {
+  box-shadow: inset 0 var(--pixel) 0 var(--ledge);
 }
 
 .player {
@@ -52,6 +65,7 @@ html[data-playing='on'] .footer { padding-bottom: calc(var(--play-ground) + 2rem
   padding: var(--space-1);
   pointer-events: none;
 }
+.dpad__pad { display: flex; gap: var(--space-1); pointer-events: none; }
 .dpad button {
   pointer-events: auto;
   width: 3.5rem;
@@ -59,10 +73,11 @@ html[data-playing='on'] .footer { padding-bottom: calc(var(--play-ground) + 2rem
   background: rgba(32, 24, 8, 0.75);
   border: var(--pixel) solid var(--paper);
   color: var(--paper);
-  font-size: 1rem;
+  font-size: 0.55rem;
   touch-action: none;
 }
-.dpad button[data-input='action'] { margin-left: auto; margin-right: var(--space-1); }
+.dpad button[data-input='left'],
+.dpad button[data-input='right'] { font-size: 1rem; }
 
 html[data-playing='on'] .dpad[hidden] { display: none; }
 

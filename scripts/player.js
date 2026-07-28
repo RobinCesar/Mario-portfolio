@@ -1,8 +1,8 @@
 import { addCoins } from './hud.js';
 
 export const GRAVITY = 0.75;
-export const MOVE_SPEED = 3.4;
-export const JUMP_VELOCITY = -12.5;
+export const MOVE_SPEED = 4.2;
+export const JUMP_VELOCITY = -14;
 export const PLAYER_W = 44;
 export const PLAYER_H = 55;
 /* Fraction of the viewport at each side that converts walking into page
@@ -11,19 +11,65 @@ export const PLAYER_H = 55;
    the character's horizontal reach. */
 export const EDGE_MARGIN = 0.08;
 export const SCROLL_SPEED = 9;
+/* Up/down drive the page directly, independent of where the character stands.
+   Faster than edge-walking because it is a deliberate "move the camera" press
+   rather than a side effect of running. */
+export const PAGE_SCROLL_SPEED = 14;
+
+/* Page elements whose top edge the character can stand on. One-way platforms:
+   you pass up through them and land on them coming down, which is what makes
+   the CV a level rather than a flat floor with scenery. */
+export const PLATFORM_SELECTOR = '.qblock, .plaque, .boss-card, .door, .slot';
+/* Below MIN it is indistinguishable from the ground; above MAX it is out of
+   jump range and would only strand the character. */
+export const PLATFORM_MIN = 26;
+export const PLATFORM_MAX = 210;
+/* Platforms move while the page scrolls, so an exact "was above it last frame"
+   test would drop the character every time the view moved. The tolerance is a
+   little over one frame of the fastest scroll. */
+export const LAND_TOLERANCE = 16;
+
+/**
+ * Pure: how far the page should scroll this frame from the up/down keys.
+ * Positive is downward, matching window.scrollBy.
+ */
+export function pageScroll(input) {
+  return (input.down ? PAGE_SCROLL_SPEED : 0) - (input.up ? PAGE_SCROLL_SPEED : 0);
+}
+
+/**
+ * Pure: the height of the surface the character would land on this step, as a
+ * distance above the ground line. Returns 0 — the ground — when nothing catches.
+ *
+ * Platforms are one-way: only a descending character lands, so jumping up
+ * through a block works the way it does in the games.
+ */
+export function platformFloor(previous, next, platforms) {
+  let floor = 0;
+  if (next.vy <= 0) return floor;
+
+  for (const platform of platforms) {
+    if (platform.y <= floor) continue;
+    if (next.x + PLAYER_W <= platform.left || next.x >= platform.right) continue;
+    if (previous.y + LAND_TOLERANCE >= platform.y && next.y <= platform.y) {
+      floor = platform.y;
+    }
+  }
+  return floor;
+}
 
 /**
  * One step of platformer physics. Pure: takes a state object and an input
  * object, returns the next state. No DOM, so it runs under Node.
  *
  * Coordinates are viewport pixels. `y` is the distance from the ground line,
- * growing upward, so 0 means standing.
+ * growing upward, so 0 means standing on the ground.
  */
 export function stepPhysics(player, input, bounds) {
+  const platforms = bounds.platforms || [];
   const vx = (input.right ? 1 : 0) * MOVE_SPEED - (input.left ? 1 : 0) * MOVE_SPEED;
 
   let vy = player.vy;
-  let y = player.y;
   let grounded = player.grounded;
 
   if (input.jump && grounded) {
@@ -33,13 +79,7 @@ export function stepPhysics(player, input, bounds) {
 
   // vy is negative going up; y grows upward, so subtract.
   vy += GRAVITY;
-  y -= vy;
-
-  if (y <= 0) {
-    y = 0;
-    vy = 0;
-    grounded = true;
-  }
+  let y = player.y - vy;
 
   let x = player.x + vx;
   let scroll = 0;
@@ -58,6 +98,17 @@ export function stepPhysics(player, input, bounds) {
   }
 
   x = Math.min(Math.max(x, 0), Math.max(bounds.width - PLAYER_W, 0));
+
+  // Horizontal position settles first: which platform catches you depends on
+  // where you end up, not where you started.
+  const floor = platformFloor(player, { x, y, vy }, platforms);
+  if (y <= floor) {
+    y = floor;
+    vy = 0;
+    grounded = true;
+  } else {
+    grounded = false;
+  }
 
   let facing = player.facing;
   if (vx > 0) facing = 1;
@@ -95,11 +146,16 @@ export function reachBox(rect) {
   };
 }
 
-const KEY_MAP = {
+/* Left/right walk. Up/down move the page, so the whole CV stays reachable
+   without running the length of it. Space is the only jump, and E is "use",
+   pairing with the mouse: both end up dispatching the same click. */
+export const KEY_MAP = {
   ArrowLeft: 'left', KeyA: 'left',
   ArrowRight: 'right', KeyD: 'right',
-  ArrowUp: 'jump', KeyW: 'jump', Space: 'jump',
-  ArrowDown: 'action', KeyS: 'action', KeyE: 'action',
+  ArrowUp: 'up', KeyW: 'up',
+  ArrowDown: 'down', KeyS: 'down',
+  Space: 'jump',
+  KeyE: 'action',
 };
 
 export function initPlayer(root = document, audio = { play() {} }) {
@@ -108,7 +164,7 @@ export function initPlayer(root = document, audio = { play() {} }) {
   const use = sprite ? sprite.querySelector('use') : null;
   if (!stage || !use) return null;
 
-  const input = { left: false, right: false, jump: false, action: false };
+  const input = { left: false, right: false, up: false, down: false, action: false };
   // A tap can begin and end inside a single frame, so a jump press is buffered
   // for a few frames rather than sampled. Without this, quick taps get eaten.
   const JUMP_BUFFER_FRAMES = 8;
@@ -133,7 +189,8 @@ export function initPlayer(root = document, audio = { play() {} }) {
     if (!slot) return;
 
     // Space activates whatever button has focus, so it stays with the control
-    // when someone is tabbing through the page. Arrows always drive the player.
+    // when someone is tabbing through the page. Everything else drives the
+    // player unconditionally.
     if (event.code === 'Space') {
       const active = document.activeElement;
       const onControl = active
@@ -170,9 +227,18 @@ export function initPlayer(root = document, audio = { play() {} }) {
     button.addEventListener('pointerleave', press(false));
   }
 
+  function groundHeight() {
+    const raw = getComputedStyle(document.documentElement)
+      .getPropertyValue('--play-ground').trim();
+    return parseFloat(raw) * 16 || 72;
+  }
+
+  function groundTop() {
+    return window.innerHeight - groundHeight();
+  }
+
   function playerRect() {
-    const groundTop = window.innerHeight - groundHeight();
-    const bottom = groundTop - player.y;
+    const bottom = groundTop() - player.y;
     return {
       left: player.x,
       right: player.x + PLAYER_W,
@@ -181,10 +247,18 @@ export function initPlayer(root = document, audio = { play() {} }) {
     };
   }
 
-  function groundHeight() {
-    const raw = getComputedStyle(document.documentElement)
-      .getPropertyValue('--play-ground').trim();
-    return parseFloat(raw) * 16 || 72;
+  /* Read fresh every frame: the page is scrolling underneath, so a cached list
+     would describe where the platforms used to be. */
+  function readPlatforms(baseline) {
+    const found = [];
+    for (const element of root.querySelectorAll(PLATFORM_SELECTOR)) {
+      const box = element.getBoundingClientRect();
+      if (box.width === 0 || box.height === 0) continue;
+      const y = baseline - box.top;
+      if (y < PLATFORM_MIN || y > PLATFORM_MAX) continue;
+      found.push({ left: box.left, right: box.right, y });
+    }
+    return found;
   }
 
   function activate(element) {
@@ -241,7 +315,15 @@ export function initPlayer(root = document, audio = { play() {} }) {
     const wantsJump = jumpBuffer > 0;
     if (jumpBuffer > 0) jumpBuffer -= 1;
 
-    player = stepPhysics(player, { ...input, jump: wantsJump }, { width: window.innerWidth });
+    // Paging first: the platforms are read after it, so they are measured
+    // where they will actually be drawn this frame.
+    const paging = pageScroll(input);
+    if (paging) window.scrollBy(0, paging);
+
+    player = stepPhysics(player, { ...input, jump: wantsJump }, {
+      width: window.innerWidth,
+      platforms: readPlatforms(groundTop()),
+    });
 
     // Spend the buffer the moment it produces a jump, so one press is one jump.
     if (wasGrounded && !player.grounded) {

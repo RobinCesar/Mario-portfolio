@@ -8,7 +8,10 @@ export const SOUNDS = {
   coin:   { type: 'square',   from: 988,  to: 1319, seconds: 0.12, gain: 0.15 },
   punch:  { type: 'square',   from: 220,  to: 110,  seconds: 0.08, gain: 0.2 },
   pull:   { type: 'triangle', from: 330,  to: 660,  seconds: 0.18, gain: 0.18 },
-  door:   { type: 'square',   from: 440,  to: 220,  seconds: 0.22, gain: 0.16 },
+  // A door is two sounds: the hinge sweeping open, then the chime below. The
+  // sweep rises on the way open and drops on the way shut.
+  door:   { type: 'sawtooth', from: 140,  to: 330,  seconds: 0.26, gain: 0.11 },
+  doorShut: { type: 'sawtooth', from: 300, to: 90,  seconds: 0.18, gain: 0.11 },
   bobomb: { type: 'sawtooth', from: 160,  to: 40,   seconds: 0.35, gain: 0.22 },
   star:   { type: 'square',   from: 660,  to: 1320, seconds: 0.5,  gain: 0.18 },
   reel:   { type: 'square',   from: 880,  to: 880,  seconds: 0.06, gain: 0.12 },
@@ -24,6 +27,10 @@ export const START_JINGLE = [
   [523, 0, 1], [659, 1, 1], [784, 2, 1], [1047, 3, 2],
   [784, 5, 1], [1047, 6, 3],
 ];
+
+/** The three-note flourish that plays over the hinge when a door opens. */
+export const DOOR_CHIME = [[523, 0, 1], [784, 1, 1], [1047, 2, 2]];
+export const DOOR_CHIME_BEAT = 0.07;
 
 export function createAudio(
   ContextCtor = globalThis.AudioContext || globalThis.webkitAudioContext,

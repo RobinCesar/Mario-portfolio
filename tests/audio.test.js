@@ -1,5 +1,5 @@
 import { test, assert, assertEqual } from './harness.js';
-import { createAudio, SOUNDS } from '../scripts/audio.js';
+import { createAudio, SOUNDS, DOOR_CHIME, DOOR_CHIME_BEAT } from '../scripts/audio.js';
 import * as state from '../scripts/state.js';
 
 function fakeContextFactory(started) {
@@ -85,7 +85,43 @@ test('audio: unknown sound names are ignored', () => {
 });
 
 test('audio: every named sound has a definition', () => {
-  for (const name of ['coin', 'punch', 'pull', 'door', 'bobomb', 'star', 'reel']) {
+  for (const name of [
+    'coin', 'punch', 'pull', 'door', 'doorShut', 'bobomb', 'star', 'reel',
+  ]) {
     assert(SOUNDS[name], `missing sound definition: ${name}`);
   }
+});
+
+test('audio: a door opens and shuts on opposite sweeps', () => {
+  assert(SOUNDS.door.to > SOUNDS.door.from, 'the hinge rises on the way open');
+  assert(SOUNDS.doorShut.to < SOUNDS.doorShut.from, 'and drops on the way shut');
+});
+
+test('audio: exponential ramps never target silence', () => {
+  // exponentialRampToValueAtTime throws on a zero target, which would break
+  // every later sound by tripping the broken flag.
+  for (const [name, sound] of Object.entries(SOUNDS)) {
+    assert(sound.from > 0 && sound.to > 0, `${name} ramps to or from zero`);
+    assert(sound.gain > 0, `${name} has no gain`);
+  }
+});
+
+test('audio: the door chime is a playable score', () => {
+  assert(DOOR_CHIME.length > 0, 'chime has notes');
+  assert(DOOR_CHIME_BEAT > 0, 'chime has a tempo');
+  for (const [frequency, atBeat, beats] of DOOR_CHIME) {
+    assert(frequency > 0, 'note has a pitch');
+    assert(atBeat >= 0, 'note starts at or after the downbeat');
+    assert(beats > 0, 'note has a length');
+  }
+});
+
+test('audio: the door chime plays a note per entry once unlocked', () => {
+  state.reset();
+  state.set('soundOn', true);
+  const started = [];
+  const audio = createAudio(fakeContextFactory(started));
+  audio.unlock();
+  audio.playSequence(DOOR_CHIME, DOOR_CHIME_BEAT);
+  assertEqual(started.length, DOOR_CHIME.length, 'one oscillator per note');
 });

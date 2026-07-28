@@ -1,12 +1,14 @@
 import { test, assert, assertEqual } from './harness.js';
 import {
-  stepPhysics, frameFor, overlaps, reachBox,
+  stepPhysics, frameFor, overlaps, reachBox, pageScroll, platformFloor,
   GRAVITY, JUMP_VELOCITY, MOVE_SPEED, PLAYER_W, EDGE_MARGIN,
-  REACH_UP, REACH_SIDE,
+  REACH_UP, REACH_SIDE, KEY_MAP, PAGE_SCROLL_SPEED, PLATFORM_MIN, PLATFORM_MAX,
 } from '../scripts/player.js';
 
 const BOUNDS = { width: 1000 };
-const IDLE = { left: false, right: false, jump: false, action: false };
+const IDLE = {
+  left: false, right: false, up: false, down: false, jump: false, action: false,
+};
 
 // 400 sits inside the free-movement zone for a 1000px viewport, which spans
 // [80, 876]. Outside it, movement converts to page scroll instead.
@@ -139,6 +141,132 @@ test('player: reach does not catch something far above', () => {
   const body = { left: 100, right: 144, top: 700, bottom: 755 };
   const wayUp = { left: 110, right: 150, top: 200, bottom: 260 };
   assertEqual(overlaps(reachBox(body), wayUp), false, 'out of range');
+});
+
+/* ------------------------------------------------------------- controls -- */
+
+test('player: up and W scroll the page up, down and S scroll it down', () => {
+  for (const code of ['ArrowUp', 'KeyW']) {
+    assertEqual(KEY_MAP[code], 'up', `${code} scrolls up`);
+  }
+  for (const code of ['ArrowDown', 'KeyS']) {
+    assertEqual(KEY_MAP[code], 'down', `${code} scrolls down`);
+  }
+  assert(pageScroll({ up: true }) < 0, 'up moves the view up the page');
+  assert(pageScroll({ down: true }) > 0, 'down moves the view down the page');
+  assertEqual(pageScroll({}), 0, 'no keys, no paging');
+  assertEqual(pageScroll({ up: true, down: true }), 0, 'both cancel out');
+  assertEqual(pageScroll({ down: true }), PAGE_SCROLL_SPEED, 'paging speed');
+});
+
+test('player: space is the only key that jumps', () => {
+  assertEqual(KEY_MAP.Space, 'jump', 'space jumps');
+  const jumpKeys = Object.entries(KEY_MAP)
+    .filter(([, slot]) => slot === 'jump')
+    .map(([code]) => code);
+  assertEqual(jumpKeys, ['Space'], 'nothing else is bound to jump');
+});
+
+test('player: E is the keyboard half of "use", pairing with the mouse', () => {
+  assertEqual(KEY_MAP.KeyE, 'action', 'E uses');
+  const actionKeys = Object.entries(KEY_MAP)
+    .filter(([, slot]) => slot === 'action')
+    .map(([code]) => code);
+  assertEqual(actionKeys, ['KeyE'], 'only E, so the arrows stay free to scroll');
+});
+
+test('player: left and right stay on both the arrows and WASD', () => {
+  assertEqual(KEY_MAP.ArrowLeft, 'left', 'left arrow');
+  assertEqual(KEY_MAP.KeyA, 'left', 'A');
+  assertEqual(KEY_MAP.ArrowRight, 'right', 'right arrow');
+  assertEqual(KEY_MAP.KeyD, 'right', 'D');
+});
+
+/* ------------------------------------------------------------ platforms -- */
+
+const LEDGE = { left: 300, right: 600, y: 90 };
+
+test('player: a descending character lands on a platform', () => {
+  const falling = spawn({ y: 95, vy: 6, grounded: false });
+  const next = stepPhysics(falling, IDLE, { ...BOUNDS, platforms: [LEDGE] });
+  assertEqual(next.y, LEDGE.y, 'settled on the ledge, not the ground');
+  assertEqual(next.grounded, true, 'grounded on it');
+  assertEqual(next.vy, 0, 'vertical speed absorbed');
+});
+
+test('player: platforms are one-way — you rise through them', () => {
+  // Starting just under the ledge and crossing it on the way up.
+  const rising = spawn({ y: 85, vy: -10, grounded: false });
+  const next = stepPhysics(rising, IDLE, { ...BOUNDS, platforms: [LEDGE] });
+  assertEqual(next.grounded, false, 'still airborne');
+  assert(next.y > LEDGE.y, `climbed past the ledge, y=${next.y}`);
+});
+
+test('player: walking off the end of a platform drops you', () => {
+  const standing = spawn({ x: LEDGE.right - 2, y: LEDGE.y, grounded: true });
+  const next = stepPhysics(standing, { ...IDLE, right: true }, {
+    ...BOUNDS, platforms: [LEDGE],
+  });
+  assertEqual(next.grounded, false, 'no longer supported');
+  assert(next.y < LEDGE.y, 'falling');
+});
+
+test('player: standing on a platform is stable frame after frame', () => {
+  let p = spawn({ x: 400, y: LEDGE.y, grounded: true });
+  for (let i = 0; i < 30; i += 1) {
+    p = stepPhysics(p, IDLE, { ...BOUNDS, platforms: [LEDGE] });
+  }
+  assertEqual(p.y, LEDGE.y, 'still on the ledge after 30 frames');
+  assertEqual(p.grounded, true, 'never fell through');
+});
+
+test('player: the highest overlapping platform wins', () => {
+  const stack = [LEDGE, { left: 300, right: 600, y: 150 }];
+  const falling = spawn({ y: 155, vy: 8, grounded: false });
+  const next = stepPhysics(falling, IDLE, { ...BOUNDS, platforms: stack });
+  assertEqual(next.y, 150, 'caught by the upper ledge, not the one below it');
+});
+
+test('player: a platform beside you, not under you, is ignored', () => {
+  const beside = { left: 800, right: 900, y: 90 };
+  const falling = spawn({ y: 95, vy: 6, grounded: false });
+  const next = stepPhysics(falling, IDLE, { ...BOUNDS, platforms: [beside] });
+  assertEqual(next.grounded, false, 'nothing caught the fall');
+  assert(next.y < 95, `fell straight past it, y=${next.y}`);
+});
+
+test('player: with no platforms the ground still catches the fall', () => {
+  let p = spawn({ y: 100, vy: 2, grounded: false });
+  let steps = 0;
+  while (!p.grounded && steps < 500) {
+    p = stepPhysics(p, IDLE, { ...BOUNDS, platforms: [] });
+    steps += 1;
+  }
+  assertEqual(p.y, 0, 'landed on the ground line');
+});
+
+test('player: platformFloor reports the ground when nothing is reachable', () => {
+  const previous = { y: 200 };
+  const next = { x: 400, y: 190, vy: 5 };
+  assertEqual(platformFloor(previous, next, []), 0, 'no platforms');
+});
+
+test('player: a full jump clears the lowest platform band', () => {
+  // Regression guard on the tuning: if the jump were ever lowered below the
+  // shortest ledge the platformer would silently become unplayable.
+  let p = stepPhysics(spawn(), { ...IDLE, jump: true }, BOUNDS);
+  let peak = p.y;
+  while (!p.grounded) {
+    p = stepPhysics(p, IDLE, BOUNDS);
+    peak = Math.max(peak, p.y);
+  }
+  assert(peak > PLATFORM_MIN, `jump peaks at ${peak}, below the ${PLATFORM_MIN} floor`);
+  // Anything above one jump has to be climbed from a lower ledge, so the cap
+  // must stay inside two hops or the top band would be dead scenery.
+  assert(
+    PLATFORM_MAX <= peak * 2,
+    `platforms accepted up to ${PLATFORM_MAX}, unreachable from a ${peak} jump`,
+  );
 });
 
 test('player: overlap detection is exclusive at the edges', () => {

@@ -25,7 +25,7 @@ export function initTitleScreen(root = document, audio = { play() {}, playSequen
     window.setTimeout(() => {
       document.documentElement.removeAttribute('data-intro');
       document.documentElement.setAttribute('data-started', 'on');
-      button.textContent = 'Playing — arrows to move, up to jump, down to act';
+      button.textContent = 'Playing — A/D walk, W/S scroll, Space jumps, E uses';
       button.setAttribute('aria-disabled', 'true');
       // Hand focus back to the document so the arrow keys reach the player
       // instead of sitting on the link that started the game.

@@ -35,6 +35,7 @@ const RUNTIME_ONLY = {
   'sprite-player-walk-a': 'scripts/player.js',
   'sprite-player-walk-b': 'scripts/player.js',
   'sprite-player-jump': 'scripts/player.js',
+  'sprite-door-open': 'scripts/blocks.js',
 };
 
 test('sprites: no unused symbols accumulate', () => {

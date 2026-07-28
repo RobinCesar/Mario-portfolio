@@ -15,6 +15,15 @@
 
 .subtitle { font-size: 1.1rem; max-width: 30rem; }
 
+/* The control legend. Readable before Press Start and left in place after, so
+   nobody has to guess which key does what mid-level. */
+.controls {
+  margin-top: var(--space-2);
+  max-width: 34rem;
+  font-size: 0.6rem;
+  line-height: 2.4;
+}
+
 .qblocks, .doors, .plaques, .sprouts, .slot__reels {
   list-style: none;
   margin: 0;
@@ -49,7 +58,9 @@
 .boss-card__lede { font-size: 1.1rem; font-weight: 600; }
 .boss-card__stack { font-family: var(--font-display); font-size: 0.6rem; }
 
-.doors li { border-bottom: 2px solid var(--panel-edge); }
+/* Direct children only: the bullets inside an opened panel are also `li`, and
+   an unscoped selector drew a rule under every line of every role. */
+.doors > li { border-bottom: 2px solid var(--panel-edge); }
 .door {
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -64,12 +75,44 @@
   text-align: left;
   cursor: pointer;
 }
-.door .sprite { grid-area: icon; }
+.door .sprite { grid-area: icon; transform-origin: 0% 50%; }
 .door__role  { grid-area: role; font-size: 0.8rem; }
 .door__where { grid-area: where; font-family: var(--font-body); font-size: 0.9rem; }
 .door__when  { grid-area: when; font-size: 0.6rem; }
-.door__panel { padding: 0 0 var(--space-2) var(--space-4); }
 .door__note { font-size: 0.85rem; font-style: italic; }
+
+/* --------------------------------------------------------- door opening --
+   Two halves of one moment: the leaf swings back on the button, and the panel
+   behind it wipes downward as if the room were being lit. Both run in steps()
+   so the motion reads as frames rather than as a smooth CSS transition. */
+
+.door--open .sprite { animation: door-swing 320ms steps(4) both; }
+
+@keyframes door-swing {
+  0%   { transform: scaleX(1) translateX(0); }
+  50%  { transform: scaleX(0.55) translateX(1px); }
+  100% { transform: scaleX(0.82) translateX(0); }
+}
+
+.door__panel { padding: 0 0 var(--space-2) var(--space-4); }
+.door__panel[hidden] { display: none; }
+
+/* Keyed off the open door rather than the panel itself, so the wipe cannot run
+   on load — with scripts disabled every panel is visible from the start, and an
+   unscoped rule would wipe all six of them in at first paint.
+   No fill-mode either: once the wipe ends the clip-path drops away entirely, so
+   a focus ring on anything inside the panel is not clipped by a leftover box. */
+.door--open + .door__panel { animation: door-reveal 320ms steps(5); }
+
+@keyframes door-reveal {
+  0%   { clip-path: inset(0 0 100% 0); opacity: 0.2; }
+  100% { clip-path: inset(0 0 0 0);    opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .door--open .sprite,
+  .door--open + .door__panel { animation: none; }
+}
 
 .plaques { display: grid; gap: var(--space-2); grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
 .plaque {
